@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+  <%  @designs.each do |design|%>
+    <div class="col">
+      <div class="card h-100">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title"><%= design.project_number %></h5>
+          <p class="card-text"><%= design.project_name %></p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted"><%= design.responsable %></small>
+        </div>
+      </div>
+    </div>
+ <% end %>
+  </div>
+</div>
