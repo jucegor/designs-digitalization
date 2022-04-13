@@ -10,6 +10,7 @@ class DesignsController < ApplicationController
   def create
     @design = Design.new(design_params)
     @design.save
+    redirect_to designs_path
   end
 
   def edit
@@ -23,11 +24,13 @@ class DesignsController < ApplicationController
   def update
     @design = Design.find(params[:id])
     @design.update(design_params)
-    redirect_to design_path(@design)
+    redirect_to designs_path
   end
 
   def destroy
-
+    @design = Design.find(params[:id])
+    @design.destroy
+    redirect_to designs_path
   end
 
   private

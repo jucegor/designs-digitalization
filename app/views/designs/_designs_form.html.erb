@@ -1,17 +1,14 @@
 <div class="container">
-
-<%= simple_form_for(design) do |f| %>
-  <%= f.input :project_number %>
-  <%= f.input :client %>
-  <%= f.input :project_name %>
-  <%= f.input :responsable %>
-  <%= f.input :revision %>
-  <%= f.input :line %>
-  <%= f.input :status %>
-  <%= f.input :autodesk_link %>
-  <%= f.input :server_path %>
-  <%= f.submit %>
-<% end %>
-
-
+  <%= simple_form_for(design) do |f| %>
+    <%= f.input :project_number %>
+    <%= f.input :client %>
+    <%= f.input :project_name %>
+    <%= f.input :responsable %>
+    <%= f.input :revision %>
+    <%= f.input :line %>
+    <%= f.input :status %>
+    <%= f.input :autodesk_link %>
+    <%= f.input :server_path %>
+    <%= f.submit "Guardar", class: "modal-button" %>
+  <% end %>
 </div>
