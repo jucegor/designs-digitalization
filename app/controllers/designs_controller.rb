@@ -1,6 +1,7 @@
 class DesignsController < ApplicationController
+
   def index
-    @designs = Design.all
+    @designs = Design.where(user: current_user)
   end
 
   def new
@@ -24,7 +25,7 @@ class DesignsController < ApplicationController
   def update
     @design = Design.find(params[:id])
     @design.update(design_params)
-    redirect_to designs_path
+    redirect_to @design
   end
 
   def destroy
