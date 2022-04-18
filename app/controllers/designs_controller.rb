@@ -1,7 +1,8 @@
 class DesignsController < ApplicationController
 
   def index
-    @designs = Design.where(user: current_user)
+    @designs = Design.where(user: current_user, status: 'activo')
+    @user = current_user
   end
 
   def new

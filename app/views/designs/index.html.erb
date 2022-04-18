@@ -1,17 +1,20 @@
 <div class="container">
+  Diseños elaborados por: <%= @user.responsible %> <br>
+  Id: <%= @user.id %> <br>
+  Email: <%= @user.email %>
+</div>
+<div class="container">
   <div class="row row-cols-1 row-cols-md-3 g-4">
   <%  @designs.each do |design|%>
     <div class="col">
       <div class="card h-100">
         <img src="..." class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title"><%= design.project_number %></h5>
+          <h5 class="card-title"><%= design.project_number %> - <%= design.id %></h5>
           <p class="card-text"><%= design.project_name %></p>
-          <p class="card-text"><%= design.revision %></p>
         </div>
         <div class="card-footer">
-          <small class="text-muted"><%= design.responsable %></small><br>
-          <small class="text-muted"><%= design.user_id %></small>
+          <small class="text-muted"><%= design.revision %></small><br>
         </div>
         <h6> <%= link_to "Eliminar", design_path(design), method: 'delete', class: "btn btn-primary" %> </h6>
         <h6> <%= link_to "Editar información", edit_design_path(design) , class: "btn btn-primary" %> </h6>

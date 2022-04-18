@@ -48,19 +48,27 @@ clientes = [
   'CONTEYOR'
   ]
 
-  status = ['activo', 'inactivo']
+status = ['activo', 'inactivo']
 
+responsible = [
+  'NIEVES ROJAS JOSE LUIS',
+  'GARDUÑO DE PAZ HECTOR ENRIQUE',
+  'HUERTA HERNANDEZ FRANCISCO',
+  'RIVAS ALAMILLO MIGUEL']
+
+iterator = 0
 4.times do
   @new_user = User.create!(
     email: Faker::Internet.email,
-    password: '123456'
+    password: '123456',
+    responsible: responsible[iterator]
   )
   10.times do
     @new_design = Design.create!(
       project_number: '22-' + (rand() * 10).to_i.to_s + (rand() * 10).to_i.to_s + (rand() * 10).to_i.to_s + '-R',
       client: clientes.sample,
       project_name: proyectos.sample,
-      responsable: Faker::Name.name_with_middle,
+      responsible: @new_user.responsible,
       revision: (rand() * 10).to_i,
       line: (rand() * 10).to_i,
       status: status.sample,
@@ -69,6 +77,7 @@ clientes = [
       user_id: @new_user.id
     )
   end
+  iterator += 1
 end
 
 puts 'done'
