@@ -1,22 +1,33 @@
 class DesignsController < ApplicationController
-
   def index
     @designs = Design.where(user: current_user, status: 'activo')
     @user = current_user
   end
 
+  def all_designs
+    @designs = Design.where(user: current_user)
+    @user = current_user
+  end
+
   def new
     @design = Design.new
+    @user = current_user
   end
 
   def create
     @design = Design.new(design_params)
-    @design.save
-    redirect_to designs_path
+    @user = current_user
+    @design.responsible = @user.responsible
+    if @design.save
+      redirect_to @design
+    else
+      render "new"
+    end
   end
 
   def edit
     @design = Design.find(params[:id])
+    @user = current_user
   end
 
   def show
@@ -38,7 +49,6 @@ class DesignsController < ApplicationController
   private
 
   def design_params
-    params.require(:design).permit(:project_number, :client, :project_name, :responsable, :revision, :line, :status, :autodesk_link, :server_path)
+    params.require(:design).permit(:project_number, :client, :project_name, :responsible, :revision, :line, :status, :autodesk_link, :server_path)
   end
-
 end

@@ -1,0 +1,34 @@
+<div class="container">
+  Diseños elaborados por: <%= @user.responsible %> <br>
+  Id: <%= @user.id %> <br>
+  Email: <%= @user.email %>
+</div>
+<%= link_to "Ver diseños", designs_path, class: "btn btn-primary" %>
+<table class="table table-hover table-dark">
+  <thead>
+    <tr>
+      <th scope="col">No. Proyecto</th>
+      <th scope="col">Cliente</th>
+      <th scope="col">Nombre del proyecto</th>
+      <th scope="col">Revisión</th>
+      <th scope="col">Autodesk Viewer</th>
+      <th scope="col">Serverbioin</th>
+      <th scope="col">Última modificación</th>
+      <th scope="col">Estatus</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @designs.each do |design| %>
+    <tr>
+      <th scope="row"> <%= link_to design.project_number, design_path(design) %> </th>
+      <td> <%= design.client %> </td>
+      <td> <%= design.project_name %> </td>
+      <td> <%= design.revision %> </td>
+      <td> <%= design.autodesk_link %> </td>
+      <td> <%= design.server_path %> </td>
+      <td> <%= design.updated_at %> </td>
+      <td> <%= design.status %> </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

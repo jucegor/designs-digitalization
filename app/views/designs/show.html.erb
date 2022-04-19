@@ -1,7 +1,7 @@
 <%=  @design.project_number  %> <br>
 <%=  @design.client  %> <br>
 <%=  @design.project_name  %> <br>
-<%=  @design.responsable  %> <br>
+<%=  @design.responsible  %> <br>
 <%=  @design.revision  %> <br>
 <%=  @design.line  %> <br>
 <%=  @design.status  %> <br>
@@ -9,4 +9,5 @@
 <%=  @design.server_path  %> <br>
 <%=  @design.user_id %>
 
-<%= link_to "Ver diseños", designs_path %>
+<%= link_to "Ver diseños", designs_path, class: "btn btn-primary" %>
+<%= link_to "Editar información", edit_design_path(@design) , class: "btn btn-primary" %>
