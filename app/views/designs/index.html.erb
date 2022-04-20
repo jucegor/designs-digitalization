@@ -25,6 +25,11 @@
   </div>
 </div>
 <div class="container">
-  <%= link_to "Nuevo diseño", new_design_path, class: 'btn btn-secondary' %>
+<% if policy(Design).create? %>
+  <%= link_to "Nuevo diseño", new_design_path, class: 'btn btn-secondary' %> <br>
+<% end %>
+
+<% if policy(Design).all_designs? %>
   <%= link_to "Todos los diseños", all_designs_path, class: 'btn btn-secondary' %>
+<% end %>
 </div>

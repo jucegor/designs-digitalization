@@ -10,4 +10,11 @@
 <%=  @design.user_id %>
 
 <%= link_to "Ver diseños", designs_path, class: "btn btn-primary" %>
-<%= link_to "Editar información", edit_design_path(@design) , class: "btn btn-primary" %>
+
+<% if policy(@design).edit? %>
+  <%= link_to "Editar información", edit_design_path(@design) , class: "btn btn-primary" %>
+<% end %>
+
+<% if policy(@design).destroy? %>
+  <%= link_to "Eliminar", design_path(@design), method: 'delete', class: "btn btn-primary" %>
+<% end %>
