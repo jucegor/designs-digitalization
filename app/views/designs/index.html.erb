@@ -15,9 +15,12 @@
         </div>
         <div class="card-footer">
           <small class="text-muted"><%= design.revision %></small><br>
+          <small class="text-muted"><%= design.status %></small><br>
         </div>
-        <h6> <%= link_to "Eliminar", design_path(design), method: 'delete', class: "btn btn-primary" %> </h6>
-        <h6> <%= link_to "Editar información", edit_design_path(design) , class: "btn btn-primary" %> </h6>
+        <% if @user.role == 'engineer' %>
+          <h6> <%= link_to "Eliminar", design_path(design), method: 'delete', class: "btn btn-primary" %> </h6>
+          <h6> <%= link_to "Editar información", edit_design_path(design) , class: "btn btn-primary" %> </h6>
+        <% end %>
         <h6> <%= link_to "Ver diseño", design_path(design) , class: "btn btn-primary" %> </h6>
       </div>
     </div>
@@ -25,11 +28,11 @@
   </div>
 </div>
 <div class="container">
-<% if policy(Design).create? %>
+<% if policy(Design).create? && @user.role != 'employee' %>
   <%= link_to "Nuevo diseño", new_design_path, class: 'btn btn-secondary' %> <br>
 <% end %>
 
-<% if policy(Design).all_designs? %>
+<% if policy(Design).all_designs? && @user.role != 'employee' %>
   <%= link_to "Todos los diseños", all_designs_path, class: 'btn btn-secondary' %>
 <% end %>
 </div>

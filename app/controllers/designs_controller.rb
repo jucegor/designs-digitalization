@@ -1,26 +1,38 @@
 class DesignsController < ApplicationController
   before_action :set_design, only: [:show,:edit,:update,:destroy]
   def index
-    @designs = policy_scope(Design.where(user: current_user, status: 'activo'))
     @user = current_user
+    case @user.role
+    when 'employee'
+      @designs = policy_scope(Design.where(status: 'activo'))
+    when 'production_manager' || 'engineering_manager'
+      @designs = policy_scope(Design)
+    when 'engineer'
+      @designs = policy_scope(Design.where(user: current_user, status: 'activo'))
+    end
   end
 
   def all_designs
-    @designs = Design.where(user: current_user)
     @user = current_user
+    case @user.role
+    when 'employee' || 'production_manager' || 'engineering_manager'
+      @designs = Design.all
+    when 'engineer'
+      @designs = Design.where(user: current_user)
+    end
     authorize @designs
   end
 
   def new
     @design = Design.new
-    authorize @design
     @user = current_user
+    authorize @design
   end
 
   def create
     @design = Design.new(design_params)
-    authorize @design
     @user = current_user
+    authorize @design
     @design.responsible = @user.responsible
     if @design.save
       redirect_to @design
@@ -54,6 +66,12 @@ class DesignsController < ApplicationController
   end
 
   def design_params
-    params.require(:design).permit(:project_number, :client, :project_name, :responsible, :revision, :line, :status, :autodesk_link, :server_path)
+    params.require(:design).permit(
+      :project_number, :client,
+      :project_name, :responsible,
+      :revision, :line,
+      :status, :autodesk_link,
+      :server_path, :user_id
+    )
   end
 end
