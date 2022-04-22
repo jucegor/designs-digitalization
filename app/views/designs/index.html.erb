@@ -1,7 +1,8 @@
 <div class="container">
   Diseños elaborados por: <%= @user.responsible %> <br>
   Id: <%= @user.id %> <br>
-  Email: <%= @user.email %>
+  Email: <%= @user.email %> <br>
+  Rol: <%= @user.role %>
 </div>
 <div class="container">
   <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -10,7 +11,7 @@
       <div class="card h-100">
         <img src="..." class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title"><%= design.project_number %> - <%= design.id %></h5>
+          <h5 class="card-title"><%= design.project_number %> - [<%= design.id %>] </h5>
           <p class="card-text"><%= design.project_name %></p>
         </div>
         <div class="card-footer">

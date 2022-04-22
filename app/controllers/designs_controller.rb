@@ -5,7 +5,7 @@ class DesignsController < ApplicationController
     case @user.role
     when 'employee'
       @designs = policy_scope(Design.where(status: 'activo'))
-    when 'production_manager' || 'engineering_manager'
+    when 'production_manager', 'engineering_manager'
       @designs = policy_scope(Design)
     when 'engineer'
       @designs = policy_scope(Design.where(user: current_user, status: 'activo'))
@@ -15,7 +15,7 @@ class DesignsController < ApplicationController
   def all_designs
     @user = current_user
     case @user.role
-    when 'employee' || 'production_manager' || 'engineering_manager'
+    when 'production_manager', 'engineering_manager'
       @designs = Design.all
     when 'engineer'
       @designs = Design.where(user: current_user)
