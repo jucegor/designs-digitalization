@@ -18,6 +18,7 @@ Nuevo diseño de <%= @user.responsible %>
     </div>
     <%= f.input :autodesk_link %>
     <%= f.input :server_path %>
+    <%= f.input :user_id, label: "📑", input_html: {value: @user.id, readonly: "readonly", class: 'visually-hidden' }  %>
     <%= f.submit "Guardar", class: "modal-button" %>
   <% end %>
 </div>

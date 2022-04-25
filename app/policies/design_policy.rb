@@ -18,13 +18,13 @@ class DesignPolicy < ApplicationPolicy
 
   # An engineer can destroy a design only if he created it
   def destroy?
-    user_is_owner_or_admin?
+    user_is_owner_or_admin
   end
 
   # An engineer can update a design only if he created it
   def update?
     # If the user is the owner of the design
-    user_is_owner_or_admin?
+    user_is_owner_or_admin
   end
 
   # An engineer can see all the designs created by him

@@ -8,12 +8,12 @@
 
 require 'faker'
 
-puts 'creating seed'
+puts 'creating seed...'
 
 User.destroy_all
 Design.destroy_all
 
-puts 'destroying all users and designs'
+puts 'destroying all users and designs...'
 
 proyectos = ['RADIATOR GEN7 MAZDA NEW MODEL',
 'CALIPER J34',
@@ -61,7 +61,8 @@ iterator = 0
   @new_user = User.create!(
     email: Faker::Internet.email,
     password: '123456',
-    responsible: responsible[iterator]
+    responsible: responsible[iterator],
+    role: 'engineer'
   )
   10.times do
     @new_design = Design.create!(
@@ -79,5 +80,22 @@ iterator = 0
   end
   iterator += 1
 end
+
+puts 'creating admin account...'
+
+User.create!(
+  email: 'admin@bioin.mx',
+  password: '123456',
+  responsible: 'Gustavo Pacheco',
+  admin: true,
+  role: 'engineering_manager'
+)
+
+User.create!(
+  email: 'employee@bioin.mx',
+  password: '123456',
+  responsible: 'Roberto Palma',
+  role: 'employee'
+)
 
 puts 'done'

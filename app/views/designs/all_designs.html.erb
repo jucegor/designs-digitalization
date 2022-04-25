@@ -1,7 +1,8 @@
 <div class="container">
   Diseños elaborados por: <%= @user.responsible %> <br>
   Id: <%= @user.id %> <br>
-  Email: <%= @user.email %>
+  Email: <%= @user.email %> <br>
+  Rol: <%= @user.role %>
 </div>
 <%= link_to "Ver diseños", designs_path, class: "btn btn-primary" %>
 <table class="table table-hover table-dark">
