@@ -37,6 +37,11 @@ gem 'simple_form', github: 'heartcombo/simple_form'
 gem 'faker'
 gem 'pundit'
 
+# PDF preview and image processing
+gem 'poppler'
+gem 'image_processing', '~> 1.2'
+
+
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
   gem 'dotenv-rails'

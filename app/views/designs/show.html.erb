@@ -7,8 +7,13 @@
 <%=  @design.status  %> <br>
 <%=  @design.autodesk_link  %> <br>
 <%=  @design.server_path  %> <br>
-<%=  @design.user_id %>
-
+<%=  @design.user_id %> <br>
+<% if @design.document.present? %>
+  <%= link_to (image_tag @design.document.preview(resize_to_limit: [200, 200]), style: 'width: 250px; height: auto'), @design.document %>
+<% else %>
+  <%= image_tag 'BIOIN-screen.png', style: 'width: 250px; height: auto' %>
+<% end %>
+<br>
 <%= link_to "Ver diseños", designs_path, class: "btn btn-primary" %>
 
 <% if policy(@design).edit? %>
