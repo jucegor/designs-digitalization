@@ -4,12 +4,17 @@
   Email: <%= @user.email %> <br>
   Rol: <%= @user.role %>
 </div>
+
 <div class="container">
   <div class="row row-cols-1 row-cols-md-3 g-4">
   <%  @designs.each do |design|%>
     <div class="col">
       <div class="card h-100">
-        <img src="..." class="card-img-top" alt="...">
+        <% if design.document.present? %>
+          <%= link_to (image_tag design.document.preview(resize_to_limit: [200, 200])), design.document %>
+        <% else %>
+          <%= image_tag 'BIOIN-screen.png' %>
+        <% end %>
         <div class="card-body">
           <h5 class="card-title"><%= design.project_number %> - [<%= design.id %>] </h5>
           <p class="card-text"><%= design.project_name %></p>
@@ -19,10 +24,10 @@
           <small class="text-muted"><%= design.status %></small><br>
         </div>
         <% if @user.role == 'engineer' %>
-          <h6> <%= link_to "Eliminar", design_path(design), method: 'delete', class: "btn btn-primary" %> </h6>
           <h6> <%= link_to "Editar información", edit_design_path(design) , class: "btn btn-primary" %> </h6>
         <% end %>
         <h6> <%= link_to "Ver diseño", design_path(design) , class: "btn btn-primary" %> </h6>
+        <h6> <%= link_to "Ver 3D", design.autodesk_link , class: "btn btn-primary", target: :_blank %> </h6>
       </div>
     </div>
  <% end %>

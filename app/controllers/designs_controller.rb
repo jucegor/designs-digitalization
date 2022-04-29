@@ -18,7 +18,7 @@ class DesignsController < ApplicationController
     when 'production_manager', 'engineering_manager'
       @designs = Design.all
     when 'engineer'
-      @designs = Design.where(user: current_user)
+      @designs = Design.where(user: current_user).order("updated_at DESC")
     end
     authorize @designs
   end
@@ -71,7 +71,8 @@ class DesignsController < ApplicationController
       :project_name, :responsible,
       :revision, :line,
       :status, :autodesk_link,
-      :server_path, :user_id
+      :server_path, :user_id,
+      :document
     )
   end
 end

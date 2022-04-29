@@ -16,19 +16,26 @@
       <th scope="col">Serverbioin</th>
       <th scope="col">Última modificación</th>
       <th scope="col">Estatus</th>
+      <th scope="col">Plano</th>
     </tr>
   </thead>
   <tbody>
   <% @designs.each do |design| %>
     <tr>
-      <th scope="row"> <%= link_to design.project_number, design_path(design) %> </th>
+      <td> <%= link_to design.project_number, design_path(design) %> </td>
       <td> <%= design.client %> </td>
       <td> <%= design.project_name %> </td>
       <td> <%= design.revision %> </td>
       <td> <%= design.autodesk_link %> </td>
       <td> <%= design.server_path %> </td>
-      <td> <%= design.updated_at %> </td>
+      <td> <%= design.updated_at.localtime %> </td>
       <td> <%= design.status %> </td>
+      <% if design.document.present? %>
+        <td> <%= link_to "SI", design.document %> </td>
+      <% else %>
+        <td> NO </td>
+      <% end %>
+
     </tr>
   <% end %>
   </tbody>
