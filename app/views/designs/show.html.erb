@@ -4,14 +4,15 @@
 <%=  @design.responsible  %> <br>
 <%=  @design.revision  %> <br>
 <%=  @design.line  %> <br>
-<%=  @design.status  %> <br>
-<%=  @design.autodesk_link  %> <br>
-<%=  @design.server_path  %> <br>
-<%=  @design.user_id %> <br>
+<% if @user.role == "engineering_manager" || @user.role == "engineer" %>
+  <%=  @design.status  %> <br>
+  <%=  @design.autodesk_link  %> <br>
+  <%=  @design.server_path  %> <br>
+<% end %>
 <% if @design.document.present? %>
-  <%= link_to (image_tag @design.document.preview(resize_to_limit: [200, 200]), style: 'width: 250px; height: auto'), @design.document %>
+  <%= link_to (image_tag @design.document.preview(resize_to_limit: [200, 200]), style: "width: 250px; height: auto"), @design.document, target: :_blank %>
 <% else %>
-  <%= image_tag 'BIOIN-screen.png', style: 'width: 250px; height: auto' %>
+  <%= image_tag "BIOIN-screen.png", style: "width: 250px; height: auto" %>
 <% end %>
 <br>
 <%= link_to "Ver diseños", designs_path, class: "btn btn-primary" %>
@@ -20,6 +21,6 @@
   <%= link_to "Editar información", edit_design_path(@design) , class: "btn btn-primary" %>
 <% end %>
 
-<% if policy(@design).destroy? %>
-  <%= link_to "Eliminar", design_path(@design), method: 'delete', class: "btn btn-primary" %>
+<% if @user.role == "engineering_manager" && policy(@design).destroy? %>
+  <%= link_to "Eliminar", design_path(@design), method: "delete", class: "btn btn-primary" %>
 <% end %>
