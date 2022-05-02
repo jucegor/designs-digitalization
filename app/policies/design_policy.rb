@@ -24,7 +24,7 @@ class DesignPolicy < ApplicationPolicy
   # An engineer can update a design only if he created it
   def update?
     # If the user is the owner of the design
-    user_is_owner_or_admin
+    user_is_owner_or_admin || user.role == 'production_manager' || user.role == "engineer"
   end
 
   # An engineer can see all the designs created by him

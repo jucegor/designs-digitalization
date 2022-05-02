@@ -1,30 +1,53 @@
 Nuevo diseño de <%= @user.responsible %>
 <div class="container">
   <%= simple_form_for(design) do |f| %>
-    <%= f.input :project_number %>
-    <%= f.input :client %>
-    <%= f.input :project_name %>
-    <%= f.input :revision %>
-    <%= f.input :line %>
-    <%= f.input :responsible, input_html: {value: @user.responsible, readonly: "readonly" }  %>
-    <div class="form-check form-switch">
-    <%= f.input :status, class: "form-check-input", label: "Activo",
-                     as: :boolean,
-                     checked_value: "activo",
-                     unchecked_value: "inactivo",
-                     input_html: {
-                       checked: design.status == "activo" ? "checked" : "" #this line changes the status of the checkbox
-                     } %>
-    </div>
-    <%= f.input :autodesk_link %>
-    <%= f.input :server_path %>
-    <%= f.file_field :document %>
+    <% case @user.role %>
+    <% when "production_manager"  %>
+      <%= f.input :project_number, input_html: {value: design.project_number, readonly: "readonly" }, label: "Número de proyecto" %>
+      <%= f.input :client, input_html: {value: design.client, readonly: "readonly" }, label: "Cliente" %>
+      <%= f.input :project_name, input_html: {value: design.project_name, readonly: "readonly" }, label: "Nombre del proyecto" %>
+      <%= f.input :revision, input_html: {value: design.revision, readonly: "readonly" }, label: "Número de revisión del plano" %>
+      <%= f.input :line, label: "Linea de producción" %>
+      <% if design.status == 'activo' %>
+        <div class="form-check form-switch">
+        <%= f.input :status, class: "form-check-input", label: "Activo",
+                    as: :boolean,
+                    checked_value: "activo",
+                    unchecked_value: "inactivo",
+                    input_html: {
+                      checked: design.status == "activo" ? "checked" : "" #this line changes the status of the checkbox
+                    } %>
+          </div>
+      <% end %>
+    <% when "engineer" %>
+      <%= f.input :project_number, label: "Número de proyecto" %>
+      <%= f.input :client, label: "Cliente" %>
+      <%= f.input :project_name, label: "Nombre del proyecto" %>
+      <%= f.input :revision, label: "Número de revisión del plano" %>
+      <%= f.input :autodesk_link, label: "Link del visor 3D" %>
+      <%= f.input :server_path, label: "Ruta del servidor" %>
+      <%= f.file_field :document%>
+      <%= f.input :responsible, input_html: {value: @user.responsible, readonly: "readonly" }, label: "Ingeniero a cargo"  %>
+    <% when "engineering_manager" %>
+      <%= f.input :project_number, label: "Número de proyecto" %>
+      <%= f.input :client, label: "Cliente" %>
+      <%= f.input :project_name, label: "Nombre del proyecto" %>
+      <%= f.input :revision, label: "Número de revisión del plano" %>
+      <%= f.input :autodesk_link, label: "Link del visor 3D" %>
+      <%= f.input :server_path, label: "Ruta del servidor" %>
+      <%= f.file_field :document%>
+      <%= f.input :line, label: "Linea de producción" %>
+          <div class="form-check form-switch">
+          <%= f.input :status, class: "form-check-input", label: "Activo",
+                      as: :boolean,
+                      checked_value: "activo",
+                      unchecked_value: "inactivo",
+                      input_html: {
+                        checked: design.status == "activo" ? "checked" : "" #this line changes the status of the checkbox
+                      } %>
+            </div>
+    <% end %>
     <%= f.input :user_id, label: "📑", input_html: {value: @user.id, readonly: "readonly", class: 'visually-hidden' }  %>
     <%= f.submit "Guardar", class: "modal-button" %>
   <% end %>
 </div>
-<% if @design.status == "activo" %>
-  <%= @design.status %>
-<% else %>
-  Este proyecto no se encuentra activo
-<% end %>
