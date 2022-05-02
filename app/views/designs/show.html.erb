@@ -1,13 +1,13 @@
-<%=  @design.project_number  %> <br>
-<%=  @design.client  %> <br>
-<%=  @design.project_name  %> <br>
-<%=  @design.responsible  %> <br>
-<%=  @design.revision  %> <br>
-<%=  @design.line  %> <br>
+Número de proyecto: <%=  @design.project_number  %> <br>
+Cliente: <%=  @design.client  %> <br>
+Número de proyecto: <%=  @design.project_name  %> <br>
+Ingeniero a cargo: <%=  @design.responsible  %> <br>
+Revisión: <%=  @design.revision  %> <br>
+Linea de producción: <%=  @design.line  %> <br>
 <% if @user.role == "engineering_manager" || @user.role == "engineer" %>
-  <%=  @design.status  %> <br>
-  <%=  @design.autodesk_link  %> <br>
-  <%=  @design.server_path  %> <br>
+  Estatus: <%=  @design.status  %> <br>
+  Link visor 3D: <%=  @design.autodesk_link  %> <br>
+  Ruta del servidor: <%=  @design.server_path  %> <br>
 <% end %>
 <% if @design.document.present? %>
   <%= link_to (image_tag @design.document.preview(resize_to_limit: [200, 200]), style: "width: 250px; height: auto"), @design.document, target: :_blank %>
@@ -17,7 +17,7 @@
 <br>
 <%= link_to "Ver diseños", designs_path, class: "btn btn-primary" %>
 
-<% if policy(@design).edit? %>
+<% if policy(@design).edit? || @user.role == "engineer" %>
   <%= link_to "Editar información", edit_design_path(@design) , class: "btn btn-primary" %>
 <% end %>
 
