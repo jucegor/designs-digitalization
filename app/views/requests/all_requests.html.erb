@@ -1,0 +1,28 @@
+<br> <br> <br>
+<%= link_to "Nueva solicitud", requests_new_path, class: 'btn btn-secondary' %> <br>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Número de proyecto</th>
+      <th scope="col">Nombre del proyecto</th>
+      <th scope="col">Fecha requerida</th>
+      <th scope="col">Estatus</th>
+      <th scope="col">Número del proyecto</th>
+      <th scope="col">Request</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @requests.each do |request| %>
+    <tr>
+      <th scope="row"><%= request.project_number_req %></th>
+      <td><%= request.project_name_req %></td>
+      <td><%= request.required_date %></td>
+      <td><%= request.status %></td>
+      <td><%= request.design_id %></td>
+      <td><%= link_to request.id, request_path(request) %></td>
+      <td><%= link_to request.id, request_path(request), method: "delete" %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

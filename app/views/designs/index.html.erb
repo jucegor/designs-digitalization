@@ -6,7 +6,7 @@
 </div>
 
 <div class="container">
-<% if policy(Design).create? && @user.role != 'employee' %>
+<% if policy(Design).create? && @user.role != 'employee' && @user.role != 'production_manager' %>
   <%= link_to "Nuevo diseño", new_design_path, class: 'btn btn-secondary' %> <br>
 <% end %>
 

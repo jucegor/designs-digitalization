@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_28_231219) do
+ActiveRecord::Schema.define(version: 2022_05_02_191425) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,18 @@ ActiveRecord::Schema.define(version: 2022_04_28_231219) do
     t.integer "user_id"
   end
 
+  create_table "requests", force: :cascade do |t|
+    t.string "project_number_req"
+    t.string "project_name_req"
+    t.date "required_date"
+    t.date "delivered"
+    t.string "status"
+    t.bigint "design_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["design_id"], name: "index_requests_on_design_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -68,4 +80,5 @@ ActiveRecord::Schema.define(version: 2022_04_28_231219) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "designs", "users"
+  add_foreign_key "requests", "designs"
 end

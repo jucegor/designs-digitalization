@@ -1,0 +1,8 @@
+<%= simple_form_for(@request) do |f| %>
+  <%= f.input :project_number_req %>
+  <%= f.input :project_name_req %>
+  <%= f.input :required_date, as: :date, html5: true %>
+  <%= f.select :status, [['Atendido', 'done'], ['Pendiente','pending']] %>
+  <%= f.input :design_id, input_html: {value: @design_id = 1 , readonly: "readonly" }, label: "Número de proyecto"  %>
+  <%= f.submit "Guardar", class: "modal-button" %>
+<% end %>
