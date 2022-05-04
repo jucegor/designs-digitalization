@@ -1,13 +1,18 @@
 <br> <br> <br>
-<%= link_to "Nueva solicitud", requests_new_path, class: 'btn btn-secondary' %> <br>
+<div class="container">
+  <h1>Nueva solicitud de diseño</h1>
+  <div class="d-flex justify-content-between">
+    <%= link_to "Proyecto Existente", new_request_path, class: 'btn btn-secondary' %> <br>
+    <%= link_to "Proyecto Nuevo", new_project_path, class: 'btn btn-secondary' %> <br>
+  </div>
+</div>
 <table class="table table-hover">
   <thead>
     <tr>
       <th scope="col">Número de proyecto</th>
       <th scope="col">Nombre del proyecto</th>
       <th scope="col">Fecha requerida</th>
-      <th scope="col">Estatus</th>
-      <th scope="col">Número del proyecto</th>
+      <th scope="col">Estatus <br>🚩|✅</th>
       <th scope="col">Request</th>
       <th scope="col">Delete</th>
     </tr>
@@ -16,12 +21,11 @@
     <% @requests.each do |request| %>
     <tr>
       <th scope="row"><%= request.project_number_req %></th>
-      <td><%= request.project_name_req %></td>
+      <td><%= request.design.project_name %></td>
       <td><%= request.required_date %></td>
-      <td><%= request.status %></td>
-      <td><%= request.design_id %></td>
-      <td><%= link_to request.id, request_path(request) %></td>
-      <td><%= link_to request.id, request_path(request), method: "delete" %></td>
+      <td><%= ((request.design.id == 1) || (request.status == "pending")) ? '🚩': '✅' %></td>
+      <td><%= link_to "Editar", edit_request_path(request) %></td>
+      <td><%= link_to "Eliminar", request_path(request), method: "delete" %></td>
     </tr>
     <% end %>
   </tbody>

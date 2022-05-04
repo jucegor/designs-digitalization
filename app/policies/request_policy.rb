@@ -7,7 +7,11 @@ class RequestPolicy < ApplicationPolicy
 
   # Everyone can see all the requests table
   def all_requests?
-    user_is_admin || user.role == 'production_manager'
+    user_is_manager
+  end
+
+  def new_project?
+    user_is_manager
   end
 
   # Only the production manager creates the request for a design
@@ -21,18 +25,18 @@ class RequestPolicy < ApplicationPolicy
 
   # The production manager can delete it's requested designs
   def destroy?
-    user_is_admin || user.role == 'production_manager'
+    user.role == 'production_manager'
   end
 
   # An engineer can update a design only if he created it
   def update?
     # If the user is the owner of the design
-    user_is_admin || user.role == 'production_manager' || user.role == "engineer"
+    user.role == 'production_manager' || user.role == "engineer" || user.role == 'engineering_manager'
   end
 
   private
 
-  def user_is_admin
-    user == user.admin
+  def user_is_manager
+    user.role == 'production_manager' || user.role == 'engineering_manager'
   end
 end

@@ -1,1 +1,23 @@
-hello from edit!
+<%= link_to "Todas las solicitudes de diseño", all_requests_path, class: "btn btn-secondary" %>
+<br>
+<div class="container">
+
+  <%= simple_form_for(@request) do |f| %>
+
+    <div class="form-group">
+      <%= f.input :project_number_req, label: "Número de proyecto solicitado" %>
+      <%= f.input :project_name_req, label: "Nombre del proyecto solicitado" %>
+      <%= f.input :required_date, as: :date, html5: true, label: "Fecha requerida de entrega" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.select :design_id, @designs.map { |d| [d.project_number + " | " + d.project_name, d.id]}, {}, class: "form-control" %>
+      <%= f.select :status, [['Atendido', 'done'], ['Pendiente','pending']] %>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit "Actualizar solicitud", class: "btn btn-primary" %>
+    </div>
+
+  <% end %>
+</div>

@@ -2,7 +2,7 @@
 
 <div class="container">
   <%= simple_form_for(@request) do |f| %>
-    <%= f.select :project_number_req, @designs.map { |d| [d.project_number + " | " + d.project_name, d.project_number]}, {prompt: "Elige un proyecto existente..."}, class: "form-control" %>
+    <%= f.input :project_number_req, label: "Número de proyecto" %>
     <%= f.input :required_date, as: :date, html5: true %>
     <%= f.select :status, [['Pendiente','pending'],['Atendido', 'done']] %>
     <%= f.input :design_id, input_html: { value: 1 }, as: "hidden" %>

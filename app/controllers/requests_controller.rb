@@ -1,22 +1,31 @@
 class RequestsController < ApplicationController
-  before_action :set_request, only: [:show,:edit,:update,:destroy]
+  before_action :set_request, only: %i[show edit update destroy]
   def all_requests
     @requests = policy_scope(Request)
+    @designs = Design.all
     authorize @requests
     @user = current_user
   end
 
-  def new
+  def new_project
     @request = Request.new
     @user = current_user
     authorize @request
   end
 
+  def new
+    @request = Request.new
+    @user = current_user
+    @designs = Design.all
+    authorize @request
+  end
+
   def create
     @request = Request.new(request_params)
+    @designs = Design.all
     authorize @request
     if @request.save
-      redirect_to requests_path
+      redirect_to all_requests_path
     else
       render "new"
     end
@@ -24,10 +33,11 @@ class RequestsController < ApplicationController
 
   def update
     @request.update(request_params)
-    redirect_to requests_path
+    redirect_to all_requests_path
   end
 
   def edit
+    @designs = Design.all
   end
 
   def show
