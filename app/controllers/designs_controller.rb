@@ -10,6 +10,7 @@ class DesignsController < ApplicationController
     when 'engineer'
       @designs = policy_scope(Design.where(user: current_user, status: 'activo'))
     end
+    params[:query].present? ? (@designs = Design.where("project_number ILIKE ?", "%#{params[:query]}%")) : (@designs = Design.all)
   end
 
   def all_designs

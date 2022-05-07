@@ -4,6 +4,18 @@
   Email: <%= @user.email %> <br>
   Rol: <%= @user.role %>
 </div>
+<div class="container">
+  <h1 class="text-center">Diseños activos</h1>
+  <%= form_tag designs_path, method: :get do %>
+  <%= text_field_tag :query,
+    params[:query],
+    class: "form-control",
+    placeholder: "Buscar un diseño"
+  %>
+  <%= submit_tag "Search", class: "btn btn-primary" %>
+<% end %>
+</div>
+
 
 <div class="container">
 <% if policy(Design).create? && @user.role != 'employee' && @user.role != 'production_manager' %>

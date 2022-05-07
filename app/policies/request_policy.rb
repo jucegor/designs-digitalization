@@ -7,7 +7,7 @@ class RequestPolicy < ApplicationPolicy
 
   # Everyone can see all the requests table
   def all_requests?
-    user_is_manager
+    user_is_manager || user.role == 'engineer'
   end
 
   def new_project?
