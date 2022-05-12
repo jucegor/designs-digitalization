@@ -9,5 +9,6 @@ export default class extends Controller {
       headers: { accept: 'application/json' }
     }).then((response) => response.text())
       .then(data => console.log(data))
+
   }
 }

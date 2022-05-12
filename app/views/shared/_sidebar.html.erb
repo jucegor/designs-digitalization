@@ -1,0 +1,52 @@
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="sidebar-sticky pt-3 d-flex align-items-end flex-column" data-controller="sidebar">
+        <p class="p-2"><%= fa_icon "duotone arrow-right" %></p>
+        <ul class="nav flex-column p-2">
+          <li class="nav-item">
+
+            <%= link_to (fa_icon "object-group") +" Diseños activos", designs_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to (fa_icon "object-ungroup") + " Todos los diseños", all_designs_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to (fa_icon "hourglass") + " Solicitudes de diseño", requests_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%# Here we need to add a new link for the help site %>
+            <%= link_to (fa_icon "question") + " Ayuda", all_designs_path, class: "nav-link" %>
+          </li>
+
+        </ul>
+
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Acciones</span>
+          <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+            <span data-feather="plus-circle"></span>
+          </a>
+        </h6>
+        <ul class="nav flex-column mb-2 p-2">
+          <li class="nav-item">
+            <%= link_to (fa_icon "solid plus") + " Nuevo diseño", new_design_path, class: "nav-link" %>
+          </li>
+          <% if current_user.role == "engineering_manager" %>
+          <li class="nav-item">
+            <%# Here we need to add a new link for the KPI's %>
+            <%= link_to (fa_icon "arrow-up") + " Indicadores", all_designs_path, class: "nav-link" %>
+          </li>
+          <% end %>
+          <li class="nav-item">
+            <%= form_tag designs_path, class: "search-form", method: :get do %>
+            <%= text_field_tag :query, params[:query], class: "side-search", placeholder: "Buscar un diseño" %>
+              <button type="submit" class="btn btn-primary btn-side">
+                <%= fa_icon "search" %>
+              </button>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>

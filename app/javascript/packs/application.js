@@ -17,15 +17,7 @@ require("jquery")
 
 // import the bootstrap javascript module
 import "bootstrap"
-//import "controllers"
-
-// This lines connect Stimulus JS with my code
-import { Application } from "stimulus"
-import { definitionsFromContext } from "stimulus/webpack-helpers"
-
-const application = Application.start()
-const context = require.context("controllers", true, /.js$/)
-application.load(definitionsFromContext(context))
+require("controllers")
 
 
-console.log('Hello from application.js')
+console.log('Hello from application.js from all the application')
