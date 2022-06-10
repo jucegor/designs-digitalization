@@ -1,52 +1,44 @@
-<div class="container-fluid">
-  <div class="row">
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-      <div class="sidebar-sticky pt-3 d-flex align-items-end flex-column" data-controller="sidebar">
-        <p class="p-2"><%= fa_icon "duotone arrow-right" %></p>
-        <ul class="nav flex-column p-2">
-          <li class="nav-item">
-
-            <%= link_to (fa_icon "object-group") +" Diseños activos", designs_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to (fa_icon "object-ungroup") + " Todos los diseños", all_designs_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to (fa_icon "hourglass") + " Solicitudes de diseño", requests_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%# Here we need to add a new link for the help site %>
-            <%= link_to (fa_icon "question") + " Ayuda", all_designs_path, class: "nav-link" %>
-          </li>
-
-        </ul>
-
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-          <span>Acciones</span>
-          <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-            <span data-feather="plus-circle"></span>
-          </a>
-        </h6>
-        <ul class="nav flex-column mb-2 p-2">
-          <li class="nav-item">
-            <%= link_to (fa_icon "solid plus") + " Nuevo diseño", new_design_path, class: "nav-link" %>
-          </li>
-          <% if current_user.role == "engineering_manager" %>
-          <li class="nav-item">
-            <%# Here we need to add a new link for the KPI's %>
-            <%= link_to (fa_icon "arrow-up") + " Indicadores", all_designs_path, class: "nav-link" %>
-          </li>
-          <% end %>
-          <li class="nav-item">
-            <%= form_tag designs_path, class: "search-form", method: :get do %>
-            <%= text_field_tag :query, params[:query], class: "side-search", placeholder: "Buscar un diseño" %>
-              <button type="submit" class="btn btn-primary btn-side">
-                <%= fa_icon "search" %>
-              </button>
-            <% end %>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </div>
+<div class="area">
+  <%= render 'shared/navbar' %>
 </div>
+<nav class="main-menu">
+    <ul>
+        <li class="has-subnav">
+          <%= link_to (fa_icon "object-group") + content_tag(:span, "Diseños activos", class:"nav-text"), designs_path, class: "align-middle" %>
+        </li>
+        <li class="has-subnav">
+          <%= link_to (fa_icon "table") + content_tag(:span, "Todos los diseños", class:"nav-text"), all_designs_path %>
+        </li>
+        <li class="has-subnav">
+          <%= link_to (fa_icon "hourglass") + content_tag(:span, "Solicitudes de diseño", class:"nav-text"), requests_path %>
+        </li>
+        <li class="has-subnav">
+          <%= link_to (fa_icon "question") + content_tag(:span, "Ayuda", class:"nav-text"), "#" %>
+        </li>
+        <li>
+          <%= link_to (fa_icon "solid plus") +  + content_tag(:span, "Nuevo diseño", class:"nav-text"), new_design_path %>
+        </li>
+        <% if current_user.role == "engineering_manager" %>
+          <li>
+            <%= link_to (fa_icon "bar-chart-o") + content_tag(:span, "Indicadores", class:"nav-text"), "#" %>
+          </li>
+        <% end %>
+        <li>
+          <a href="/requests" class="row">
+            <%= image_tag "active-designs" %>
+            <span class="nav-text col">Solicitudes de diseño</span>
+          </a>
+        </li>
+    </ul>
+
+    <ul class="logout">
+        <li>
+            <a href="#">
+                  <i class="fa fa-power-off fa"></i>
+                <span class="nav-text">
+                    Logout
+                </span>
+            </a>
+        </li>
+    </ul>
+</nav>

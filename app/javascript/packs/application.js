@@ -17,6 +17,7 @@ require("jquery")
 
 // import the bootstrap javascript module
 import "bootstrap"
+
 require("controllers")
 
 

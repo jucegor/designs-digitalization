@@ -1,32 +1,36 @@
-<div class="container">
-  Diseños elaborados por: <%= @user.responsible %> <br>
-  Id: <%= @user.id %> <br>
-  Email: <%= @user.email %> <br>
-  Rol: <%= @user.role %>
-</div>
-<div class="container">
-  <h1 class="text-center">Diseños activos</h1>
-  <%= form_tag designs_path, method: :get do %>
-  <%= text_field_tag :query,
-    params[:query],
-    class: "form-control",
-    placeholder: "Buscar un diseño"
-  %>
-  <button type="submit" class="btn btn-primary">
-    <%= fa_icon "search" %>
-  </button>
-<% end %>
+
+<div class="container d-flex justify-content-evenly">
+
+
+
+
 </div>
 
+<div class="row align-items-center m-5">
+  <div class="col d-flex justify-content-around">
+    <% if policy(Design).create? && @user.role != 'employee' && @user.role != 'production_manager' %>
+      <%= link_to "Nuevo diseño", new_design_path, class: 'btn btn-secondary' %> <br>
+    <% end %>
+    <% if policy(Design).all_designs? && @user.role != 'employee' %>
+      <%= link_to "Todos los diseños", all_designs_path, class: 'btn btn-secondary' %>
+    <% end %>
+  </div>
+
+  <div class="col">
+      <%= form_tag designs_path, id: "content", method: :get do %>
+        <%= text_field_tag :query, params[:query], class: "input", id: "search-input", placeholder: "Buscar un diseño" %>
+        <button type="reset" class="search" id="search-btn"></button>
+      <% end %>
+  </div>
+
+  <div class="col">
+    <h1 class="text-center">Diseños activos</h1>
+  </div>
+</div>
+
 
 <div class="container">
-<% if policy(Design).create? && @user.role != 'employee' && @user.role != 'production_manager' %>
-  <%= link_to "Nuevo diseño", new_design_path, class: 'btn btn-secondary' %> <br>
-<% end %>
 
-<% if policy(Design).all_designs? && @user.role != 'employee' %>
-  <%= link_to "Todos los diseños", all_designs_path, class: 'btn btn-secondary' %>
-<% end %>
 </div>
 
 <div class="container">
