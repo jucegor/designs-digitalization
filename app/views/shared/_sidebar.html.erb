@@ -3,40 +3,57 @@
 </div>
 <nav class="main-menu">
     <ul>
-        <li class="has-subnav">
-          <%= link_to (fa_icon "object-group") + content_tag(:span, "Diseños activos", class:"nav-text"), designs_path, class: "align-middle" %>
+       <li>
+          <a href="/designs" class="row">
+            <%= image_tag "welder", class:"image-icon m-2" %>
+            <span class="nav-text col">Diseños activos</span>
+          </a>
         </li>
-        <li class="has-subnav">
-          <%= link_to (fa_icon "table") + content_tag(:span, "Todos los diseños", class:"nav-text"), all_designs_path %>
-        </li>
-        <li class="has-subnav">
-          <%= link_to (fa_icon "hourglass") + content_tag(:span, "Solicitudes de diseño", class:"nav-text"), requests_path %>
-        </li>
-        <li class="has-subnav">
-          <%= link_to (fa_icon "question") + content_tag(:span, "Ayuda", class:"nav-text"), "#" %>
-        </li>
+
         <li>
-          <%= link_to (fa_icon "solid plus") +  + content_tag(:span, "Nuevo diseño", class:"nav-text"), new_design_path %>
+          <a href="/all_designs" class="row">
+            <%= image_tag "all-designs", class:"image-icon m-2" %>
+            <span class="nav-text col">Todos los diseños</span>
+          </a>
         </li>
-        <% if current_user.role == "engineering_manager" %>
-          <li>
-            <%= link_to (fa_icon "bar-chart-o") + content_tag(:span, "Indicadores", class:"nav-text"), "#" %>
-          </li>
-        <% end %>
+
         <li>
           <a href="/requests" class="row">
-            <%= image_tag "active-designs" %>
+            <%= image_tag "designs-requests", class:"image-icon m-2" %>
             <span class="nav-text col">Solicitudes de diseño</span>
           </a>
         </li>
+
+        <li>
+          <a href="#" class="row">
+            <%= image_tag "help", class:"image-icon m-2" %>
+            <span class="nav-text col">Ayuda</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="/designs/new" class="row">
+            <%= image_tag "new-design", class:"image-icon m-2" %>
+            <span class="nav-text col">Nuevo diseño</span>
+          </a>
+        </li>
+
+        <% if current_user.role == "engineering_manager" %>
+        <li>
+          <a href="#" class="row">
+            <%= image_tag "chart", class:"image-icon m-2" %>
+            <span class="nav-text col">Indicadores</span>
+          </a>
+        </li>
+        <% end %>
     </ul>
 
     <ul class="logout">
         <li>
-            <a href="#">
-                  <i class="fa fa-power-off fa"></i>
-                <span class="nav-text">
-                    Logout
+            <a href="#" class="row">
+                <%= image_tag "log-out", class:"image-icon m-2" %>
+                <span class="nav-text col">
+                    Cerrar sesión
                 </span>
             </a>
         </li>

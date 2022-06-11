@@ -1,57 +1,44 @@
 
-<div class="container d-flex justify-content-evenly">
+<h1 class="text-center">Diseños activos</h1>
 
-
-
-
-</div>
-
-<div class="row align-items-center m-5">
-  <div class="col d-flex justify-content-around">
-    <% if policy(Design).create? && @user.role != 'employee' && @user.role != 'production_manager' %>
-      <%= link_to "Nuevo diseño", new_design_path, class: 'btn btn-secondary' %> <br>
+ <div>
+    <%= form_tag designs_path, id: "content", method: :get do %>
+      <%= text_field_tag :query, params[:query], class: "input", id: "search-input", placeholder: "Buscar un diseño" %>
+      <button type="reset" class="search" id="search-btn"></button>
     <% end %>
-    <% if policy(Design).all_designs? && @user.role != 'employee' %>
-      <%= link_to "Todos los diseños", all_designs_path, class: 'btn btn-secondary' %>
-    <% end %>
-  </div>
-
-  <div class="col">
-      <%= form_tag designs_path, id: "content", method: :get do %>
-        <%= text_field_tag :query, params[:query], class: "input", id: "search-input", placeholder: "Buscar un diseño" %>
-        <button type="reset" class="search" id="search-btn"></button>
-      <% end %>
-  </div>
-
-  <div class="col">
-    <h1 class="text-center">Diseños activos</h1>
-  </div>
 </div>
 
-
-<div class="container">
-
-</div>
-
-<div class="container">
-<%  @designs.each do |design|%>
-<div class="card-product">
-  <% if design.document.present? %>
-    <%= link_to (image_tag design.document.preview(resize_to_limit: [200, 200])), design.document, target: :_blank %>
-  <% else %>
-    <%= image_tag 'BIOIN-screen.png' %>
+<div class="d-flex justify-content-evenly">
+  <% if policy(Design).create? && @user.role != 'employee' && @user.role != 'production_manager' %>
+    <%= link_to (image_tag "new-design") + "Nuevo diseño", new_design_path, class: 'btn btn-secondary' %> <br>
   <% end %>
-  <div class="card-product-infos">
-    <h2><%= design.project_number %></h2>
-    <p><%= design.project_name %><strong> | Revisión: <%= design.revision %></strong></p>
-  </div>
-  <div class="card-buttons">
-    <% if @user.role == 'engineer' || @user.role == 'production_manager' %>
-      <h6> <%= link_to "Editar información", edit_design_path(design) %> </h6>
-    <% end %>
-    <h6> <%= link_to "Detalles del  diseño", design_path(design) %> </h6>
-    <h6> <%= link_to "Ver 3D", design.autodesk_link, target: :_blank %> </h6>
-  </div>
+  <% if policy(Design).all_designs? && @user.role != 'employee' %>
+    <%= link_to (image_tag "all-designs") + "Todos los diseños", all_designs_path, class: 'btn btn-secondary' %>
+  <% end %>
 </div>
-<% end %>
+
+
+<div class="container vertical-scrollable">
+  <div class="row">
+    <%  @designs.each do |design|%>
+      <div class="card-product">
+        <% if design.document.present? %>
+          <%= link_to (image_tag design.document.preview(resize_to_limit: [200, 200])), design.document, target: :_blank %>
+        <% else %>
+          <%= image_tag 'BIOIN-screen.png' %>
+        <% end %>
+        <div class="card-product-infos">
+          <h2><%= design.project_number %></h2>
+          <p><%= design.project_name %><strong> | Revisión: <%= design.revision %></strong></p>
+        </div>
+        <div class="card-buttons">
+          <% if @user.role == 'engineer' || @user.role == 'production_manager' %>
+            <h6> <%= link_to "Editar información", edit_design_path(design) %> </h6>
+          <% end %>
+          <h6> <%= link_to "Detalles del  diseño", design_path(design) %> </h6>
+          <h6> <%= link_to "Ver 3D", design.autodesk_link, target: :_blank %> </h6>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
