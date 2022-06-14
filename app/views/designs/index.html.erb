@@ -8,12 +8,14 @@
     <% end %>
 </div>
 
-<div class="d-flex justify-content-evenly">
+
+
+<div class="d-flex justify-content-evenly m-3">
   <% if policy(Design).create? && @user.role != 'employee' && @user.role != 'production_manager' %>
-    <%= link_to (image_tag "new-design") + "Nuevo diseño", new_design_path, class: 'btn btn-secondary' %> <br>
+    <%= link_to (image_tag "new-design", class: "button-images") + "Nuevo diseño", new_design_path, class: 'btn btn-secondary align-self-center rounded-pill' %> <br>
   <% end %>
   <% if policy(Design).all_designs? && @user.role != 'employee' %>
-    <%= link_to (image_tag "all-designs") + "Todos los diseños", all_designs_path, class: 'btn btn-secondary' %>
+    <%= link_to (image_tag "all-designs", class: "button-images") + "Todos los diseños", all_designs_path, class: 'btn btn-dark align-self-center rounded-pill' %>
   <% end %>
 </div>
 

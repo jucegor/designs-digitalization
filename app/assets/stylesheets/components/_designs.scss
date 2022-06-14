@@ -1,8 +1,10 @@
 .vertical-scrollable>.row {
-  position: absolute;
-  top: 180px;
-  bottom: 100px;
-  left: 180px;
-  width: 80%;
+  width: 100%;
+  height: 60vh;
   overflow-y: scroll;
+}
+
+.button-images{
+  width: 50px;
+  height: 50px;
 }
