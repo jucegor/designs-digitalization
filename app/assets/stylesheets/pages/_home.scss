@@ -1,17 +1,10 @@
 // Specific CSS for your home-page
+body{
+  overflow-x: hidden;
+}
 
 .home-menu{
   height: 0px;
-}
-
-header{
-  background-image: linear-gradient(45deg,
-      rgba(8, 83, 156, 0.75),
-      rgba(255, 255, 255, 0.75)),
-      url('portada.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 90vh;
 }
 
 header > div > h1{
@@ -59,8 +52,31 @@ section#services{
     -moz-transition: opacity 1s ease-in-out;
     -o-transition: opacity 1s ease-in-out;
     transition: opacity 1s ease-in-out;
+  border: none;
+  border-radius: 25px;
+  padding: 10px;
+  box-shadow: 5px 10px 8px 10px #888888;
 }
 
 #image-design img.image-design-bottom:hover {
   opacity: 0;
+}
+
+
+#colaboration {
+  background-image: url('colaboration');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 90vh;
+}
+
+#colaboration > div >h2{
+  font-size: 3.5rem;
+  align-items: center;
+}
+
+#scroll-up-btn{
+    position: sticky;
+    bottom: 0;
+    left: 100vw;
 }

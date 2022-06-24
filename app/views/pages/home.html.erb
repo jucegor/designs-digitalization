@@ -30,14 +30,14 @@
         <h1 class="display-5 fw-bold lh-1 mb-3">Digitalización de planos</h1>
         <p class="lead">Una forma eficiente y segura de compartir diseños de productos con todas las áreas productivas. Conoce los detalles de cada producto y haz las preguntas directas al ingeniero a cargo.</p>
         <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-          <a class="btn btn-dark btn-xl rounded-pill" role="button" href="#about">Iniciar sesión</a>
+          <%= link_to "Iniciar sesión", new_user_session_url, class: "btn btn-dark btn-xl rounded-pill" %>
         </div>
       </div>
     </div>
   </div>
 
 
-<section id="services" class="content-section bg-primary text-white text-center">
+<section id="services" class="content-section bg-secondary text-white text-center">
     <div class="container">
         <div class="content-section-heading">
             <h3 style="color: var(--bs-cyan);">¿Que encontrarás?</h3>
@@ -70,13 +70,13 @@
         <div class="col-lg-10 mx-auto">
           <h2>Consulta los planos digitales de todos los proyectos</h2>
           <p class="lead mb-5"><span>Genera una conversación constante con el encargado del proyecto</span></p>
-          <a class="btn btn-dark btn-xl js-scroll-trigger" role="button" href="#services" style="border-radius: 50px;">Ver todos los diseños</a>
+          <%= link_to "Ver todos los diseños", new_user_session_url, class: "btn btn-dark btn-xl rounded-pill" %>
         </div>
       </div>
     </div>
 </section>
 
-<section class="callout" style="background: url(&quot;assets/img/colaboracion.jpg&quot;);">
+<section class="callout d-flex align-items-center" id="colaboration">
     <div class="container d-flex justify-content-end" style="text-align: right;">
         <h2 class="mb-5" style="text-align: right;color: rgb(255,255,255);"><span>Una forma eficiente de&nbsp;</span><em>colaborar</em><span><br>en cada proyecto.
         <br></span></h2>
@@ -86,5 +86,9 @@
 <footer class="footer text-center">
     <div class="container">
         <p class="text-muted mb-0 small">Copyright &nbsp;© Biodiversidad Industrial SA de CV 2022</p>
-    </div><a class="js-scroll-trigger scroll-to-top rounded btn btn-secondary btn-sm" href="#page-top"><i class="fa fa-angle-up"></i></a>
+    </div>
 </footer>
+
+<a class="js-scroll-trigger scroll-to-top rounded btn btn-secondary btn-sm" href="#page-top" id="scroll-up-btn">
+  <i class="fa fa-angle-up"></i>
+</a>
