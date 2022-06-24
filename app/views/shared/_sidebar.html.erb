@@ -50,12 +50,14 @@
 
     <ul class="logout">
         <li>
-            <a href="#" class="row">
+            <a href="/users/sign_out" class="row" method="delete">
                 <%= image_tag "log-out", class:"image-icon m-2" %>
                 <span class="nav-text col">
                     Cerrar sesión
                 </span>
             </a>
         </li>
+    <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "row" %>
     </ul>
+
 </nav>

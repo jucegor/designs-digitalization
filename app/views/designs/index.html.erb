@@ -1,19 +1,23 @@
 
 <h1 class="text-center">Diseños activos</h1>
 
- <div>
-    <%= form_tag designs_path, id: "content", method: :get do %>
-      <%= text_field_tag :query, params[:query], class: "input", id: "search-input", placeholder: "Buscar un diseño" %>
-      <button type="reset" class="search" id="search-btn"></button>
-    <% end %>
-</div>
-
-
-
 <div class="d-flex justify-content-evenly m-3">
   <% if policy(Design).create? && @user.role != 'employee' && @user.role != 'production_manager' %>
     <%= link_to (image_tag "new-design", class: "button-images") + "Nuevo diseño", new_design_path, class: 'btn btn-secondary align-self-center rounded-pill' %> <br>
   <% end %>
+
+  <div class="form-floating mb-3">
+    <input type="email" class="form-control" id="floatingInput" placeholder="Numero de proyecto o nombre">
+    <label for="floatingInput">Buscar un proyecto</label>
+  </div>
+
+
+  <%= form_tag designs_path, id: "content", method: :get do %>
+    <%= text_field_tag :query, params[:query], class: "form-control", id: "floatingInput", placeholder: "Buscar un diseño" %>
+    <button type="reset" class="btn btn-primary rounded-pill" id="search-btn">Buscar</button>
+    <%= link_to "Ver todo", designs_path, class: "btn btn-secondary rounded-pill" %>
+  <% end %>
+
   <% if policy(Design).all_designs? && @user.role != 'employee' %>
     <%= link_to (image_tag "all-designs", class: "button-images") + "Todos los diseños", all_designs_path, class: 'btn btn-dark align-self-center rounded-pill' %>
   <% end %>
