@@ -8,12 +8,14 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
   </head>
 
   <body>
-    <%= render 'shared/navbar' %>
+  <% if user_signed_in? %>
+    <%= render 'shared/sidebar' %>
+  <% end %>
+
     <%= render 'shared/flashes' %>
 
     <%= yield %>

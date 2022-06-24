@@ -1,31 +1,94 @@
 
-    <header class="masthead" style="background-image:url('assets/intro-bg.jpg');">
-        <div class="intro-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 mx-auto">
-                        <h1 class="brand-heading">Digitalización de planos</h1>
-                        <p class="intro-text">Una forma organizada y eficiente de compartir diseños<br>Confiabilidad y eficencia</p><a class="btn btn-link btn-circle" role="button" href="#about"><i class="fa fa-angle-double-down animated"></i></a>
-                    </div>
-                </div>
+
+<div class="nav justify-content-end sticky-top home-menu">
+  <button class="btn btn-secondary btn-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fa fa-bars d-flex justify-content-center align-items-center"></i></button>
+</div>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasRightLabel">Menú</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="list-group">
+      <%= link_to "Diseños activos", designs_path, class: "text-decoration-none list-group-item list-group-item-action" %>
+      <%= link_to "Todos los diseños", all_designs_path, class: "text-decoration-none list-group-item list-group-item-action" %>
+      <%= link_to "Ayuda", designs_path, class: "text-decoration-none list-group-item list-group-item-action" %>
+      <%= link_to "Nuevo diseño", new_design_path, class: "text-decoration-none list-group-item list-group-item-action" %>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+      <div class="col" id="image-design">
+        <%= image_tag "design-3d", class: "d-block mx-lg-auto img-fluid image-design-top", width: "500", height: "300" %>
+        <%= image_tag "design-blueprint", class: "d-block mx-lg-auto img-fluid image-design-bottom", width: "500", height: "300" %>
+      </div>
+      <div class="col">
+        <%= image_tag "logo-bioin.png", class: "logo-header" %> <br> <br>
+        <h1 class="display-5 fw-bold lh-1 mb-3">Digitalización de planos</h1>
+        <p class="lead">Una forma eficiente y segura de compartir diseños de productos con todas las áreas productivas. Conoce los detalles de cada producto y haz las preguntas directas al ingeniero a cargo.</p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+          <%= link_to "Iniciar sesión", new_user_session_url, class: "btn btn-dark btn-xl rounded-pill" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<section id="services" class="content-section bg-secondary text-white text-center">
+    <div class="container">
+        <div class="content-section-heading">
+            <h3 style="color: var(--bs-cyan);">¿Que encontrarás?</h3>
+            <h2 class="mb-5">Herramientas del portal</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-lg-3 mb-5 mb-lg-0"><span class="mx-auto service-icon rounded-circle mb-3"><%= image_tag "smartphone", class: "icon-homepage" %></span>
+                <h4><strong>Planos en cualquier dispositivo</strong></h4>
+                <p class="mb-0 text-faded">Consulta de planos en dispositivos móviles.</p>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-5 mb-lg-0"><span class="mx-auto service-icon rounded-circle mb-3"><%= image_tag "update", class: "icon-homepage" %></span>
+                <h4><strong>Actualización instantanea</strong></h4>
+                <p class="mb-0 text-faded">Todas las actualizaciones suceden en segundos.</p>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-5 mb-lg-0"><span class="mx-auto service-icon rounded-circle mb-3"><%= image_tag "comment", class: "icon-homepage" %></span>
+                <h4><strong>Comentarios al ingeniero a cargo</strong></h4>
+                <p class="mb-0 text-faded"><span></span><span>Comentarios, aclaraciones y solicitudes de información adicional.</span></p>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-5 mb-lg-0"><span class="mx-auto service-icon rounded-circle mb-3"><%= image_tag "request", class: "icon-homepage" %></span>
+                <h4><strong>Solicitud de planos</strong></h4>
+                <p class="mb-0 text-faded">Seguimiento a cada solicitud.</p>
             </div>
         </div>
-    </header>
-    <section class="text-center content-section" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <h2>Ver todos los diseños</h2>
-                    <%= link_to "Ingresar", new_user_session_url, class: 'btn btn-primary' %>
-                </div>
-            </div>
+    </div>
+</section>
+
+<section id="about" class="content-section bg-light">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-lg-10 mx-auto">
+          <h2>Consulta los planos digitales de todos los proyectos</h2>
+          <p class="lead mb-5"><span>Genera una conversación constante con el encargado del proyecto</span></p>
+          <%= link_to "Ver todos los diseños", new_user_session_url, class: "btn btn-dark btn-xl rounded-pill" %>
         </div>
-    </section>
+      </div>
+    </div>
+</section>
 
+<section class="callout d-flex align-items-center" id="colaboration">
+    <div class="container d-flex justify-content-end" style="text-align: right;">
+        <h2 class="mb-5" style="text-align: right;color: rgb(255,255,255);"><span>Una forma eficiente de&nbsp;</span><em>colaborar</em><span><br>en cada proyecto.
+        <br></span></h2>
+    </div>
+</section>
 
+<footer class="footer text-center">
+    <div class="container">
+        <p class="text-muted mb-0 small">Copyright &nbsp;© Biodiversidad Industrial SA de CV 2022</p>
+    </div>
+</footer>
 
-    <footer>
-        <div class="container text-center">
-            <p>Biodiversidad Industrial S.A. de C.V ©&nbsp; 2022</p>
-        </div>
-    </footer>
+<a class="js-scroll-trigger scroll-to-top rounded btn btn-secondary btn-sm" href="#page-top" id="scroll-up-btn">
+  <i class="fa fa-angle-up"></i>
+</a>

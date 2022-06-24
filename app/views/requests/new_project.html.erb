@@ -1,0 +1,11 @@
+<br><br><br>
+
+<div class="container">
+  <%= simple_form_for(@request) do |f| %>
+    <%= f.input :project_number_req, label: "Número de proyecto" %>
+    <%= f.input :required_date, as: :date, html5: true %>
+    <%= f.select :status, [['Pendiente','pending'],['Atendido', 'done']] %>
+    <%= f.input :design_id, input_html: { value: 1 }, as: "hidden" %>
+    <%= f.submit "Guardar", class: "modal-button" %>
+  <% end %>
+</div>
