@@ -1,32 +1,55 @@
-<br> <br> <br>
-<div class="container">
-  <h1>Nueva solicitud de diseño</h1>
-  <div class="d-flex justify-content-between">
-    <%= link_to "Proyecto Existente", new_request_path, class: 'btn btn-secondary' %> <br>
-    <%= link_to "Proyecto Nuevo", new_project_path, class: 'btn btn-secondary' %> <br>
+<%= render 'shared/sidebar' %>
+
+<div id="all-designs-table">
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary rounded-pill position-absolute top-0 end-0 m-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Nueva solicitud
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Nueva solicitud de diseño</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body d-flex justify-content-between">
+          <%= link_to "Proyecto Existente", new_request_path, class: "btn btn-outline-secondary rounded-pill" %>
+          <%= link_to "Proyecto Nuevo", new_project_path, class: "btn btn-outline-success rounded-pill" %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
   </div>
+  <br>
+  <br>
+  <table class="table table-hover data-table">
+    <thead>
+      <tr>
+        <th scope="col">Número de proyecto</th>
+        <th scope="col">Nombre del proyecto</th>
+        <th scope="col">Fecha requerida</th>
+        <th scope="col">Estatus <br>🚩|✅</th>
+        <th scope="col">Request</th>
+        <th scope="col">Delete</th>
+        <th scope="col">Creación</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @requests.each do |request| %>
+      <tr>
+        <th scope="row"><%= request.project_number_req %></th>
+        <td><%= request.design.project_name %></td>
+        <td><%= request.required_date %></td>
+        <td><%= ((request.design.id == 1) || (request.status == "pending")) ? '🚩': '✅' %></td>
+        <td><%= link_to "Editar", edit_request_path(request) %></td>
+        <td><%= link_to "Eliminar", request_path(request), method: "delete" %></td>
+        <td><%= request.created_at.in_time_zone("Mexico City").strftime("%Y/%m/%d %H:%m") %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
-<table class="table table-hover data-table">
-  <thead>
-    <tr>
-      <th scope="col">Número de proyecto</th>
-      <th scope="col">Nombre del proyecto</th>
-      <th scope="col">Fecha requerida</th>
-      <th scope="col">Estatus <br>🚩|✅</th>
-      <th scope="col">Request</th>
-      <th scope="col">Delete</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @requests.each do |request| %>
-    <tr>
-      <th scope="row"><%= request.project_number_req %></th>
-      <td><%= request.design.project_name %></td>
-      <td><%= request.required_date %></td>
-      <td><%= ((request.design.id == 1) || (request.status == "pending")) ? '🚩': '✅' %></td>
-      <td><%= link_to "Editar", edit_request_path(request) %></td>
-      <td><%= link_to "Eliminar", request_path(request), method: "delete" %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
