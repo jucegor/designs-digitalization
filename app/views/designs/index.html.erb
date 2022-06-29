@@ -1,45 +1,85 @@
 <%= render 'shared/sidebar' %>
 
-<h1 class="text-center">Diseños activos</h1>
+<!--Hey! This is the original version
+of Simple CSS Waves-->
 
-<div class="d-flex justify-content-evenly m-3" id="index-options">
-  <% if policy(Design).create? && @user.role != 'employee' && @user.role != 'production_manager' %>
-    <%= link_to (image_tag "new-design", class: "button-images") + "Nuevo diseño", new_design_path, class: 'btn btn-secondary align-self-center rounded-pill' %> <br>
-  <% end %>
+<div class="header">
 
-  <%= form_tag designs_path, id: "content", method: :get, class: "d-flex justify-content-between" do %>
-    <%= text_field_tag :query, params[:query], class: "form-control", id: "floatingInput", placeholder: "Buscar un diseño" %>
-    <button type="reset" class="btn btn-outline-primary" id="search-btn">Buscar</button>
-    <%= link_to "Reestablecer", designs_path, class: "btn btn-outline-secondary" %>
-  <% end %>
+  <!--Content before waves-->
+  <div class="inner-header flex">
+  <%= image_tag "blueprints" %>
+  <h1>Diseños Activos</h1>
+  </div>
 
-  <% if policy(Design).all_designs? && @user.role != 'employee' %>
-    <%= link_to (image_tag "all-designs", class: "button-images") + "Todos los diseños", all_designs_path, class: 'btn btn-dark align-self-center rounded-pill' %>
-  <% end %>
+  <!--Waves Container-->
+  <div>
+    <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+    <defs>
+    <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+    </defs>
+    <g class="parallax">
+    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+    <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+    </g>
+    </svg>
+  </div>
+  <!--Waves end-->
+
 </div>
+<!--Header ends-->
 
 
-<div class="container vertical-scrollable">
-  <div class="row">
-    <%  @designs.each do |design|%>
-      <div class="card-product">
-        <% if design.document.present? %>
-          <%= link_to (image_tag design.document.preview(resize_to_limit: [200, 200])), design.document, target: :_blank %>
-        <% else %>
-          <%= image_tag 'BIOIN-screen.png' %>
-        <% end %>
-        <div class="card-product-infos">
-          <h2><%= design.project_number %></h2>
-          <p><%= design.project_name %><strong> | Revisión: <%= design.revision %></strong></p>
-        </div>
-        <div class="card-buttons">
-          <% if @user.role == 'engineer' || @user.role == 'production_manager' %>
-            <h6> <%= link_to "Editar información", edit_design_path(design) %> </h6>
-          <% end %>
-          <h6> <%= link_to "Detalles del  diseño", design_path(design) %> </h6>
-          <h6> <%= link_to "Ver 3D", design.autodesk_link, target: :_blank %> </h6>
-        </div>
-      </div>
+
+  <div class="d-flex justify-content-end m-3" id="index-options">
+
+    <%= form_tag designs_path, id: "content", method: :get, class: "d-flex justify-content-between" do %>
+      <%= text_field_tag :query, params[:query], class: "form-control", id: "floatingInput", placeholder: "Buscar un diseño" %>
+      <button type="reset" class="btn btn-outline-primary" id="search-btn">Buscar</button>
+      <%= link_to "Reestablecer", designs_path, class: "btn btn-outline-secondary" %>
+    <% end %>
+
+  </div>
+
+<!--Main row starts-->
+<div class="row">
+
+  <div class="col d-flex flex-column m-5 p-2" id="index-options">
+    <% if policy(Design).create? && @user.role != 'employee' && @user.role != 'production_manager' %>
+      <%= link_to (image_tag "new-design", class: "button-images") + "Nuevo diseño", new_design_path, class: 'btn btn-secondary align-self-center rounded-pill m-5 main-btn-designs' %> <br>
+    <% end %>
+
+    <% if policy(Design).all_designs? && @user.role != 'employee' %>
+      <%= link_to (image_tag "all-designs", class: "button-images") + "Todos los diseños", all_designs_path, class: 'btn btn-dark align-self-center rounded-pill m-5 main-btn-designs' %>
     <% end %>
   </div>
-</div>
+
+  <div class="col-6 container vertical-scrollable" id="designs-cards">
+    <div class="row">
+      <%  @designs.each do |design|%>
+        <div class="card-product">
+          <% if design.document.present? %>
+            <%= link_to (image_tag design.document.preview(resize_to_limit: [200, 200])), design.document, target: :_blank %>
+          <% else %>
+            <%= image_tag 'BIOIN-screen.png' %>
+          <% end %>
+          <div class="card-product-infos">
+            <h2><%= design.project_number %></h2>
+            <p><%= design.project_name %><strong> | Revisión: <%= design.revision %></strong></p>
+          </div>
+          <div class="card-buttons">
+            <% if @user.role == 'engineer' || @user.role == 'production_manager' %>
+              <h6> <%= link_to "Editar información", edit_design_path(design) %> </h6>
+            <% end %>
+            <h6> <%= link_to "Detalles del  diseño", design_path(design) %> </h6>
+            <h6> <%= link_to "Ver 3D", design.autodesk_link, target: :_blank %> </h6>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+
+</div><!--Main row ends-->
