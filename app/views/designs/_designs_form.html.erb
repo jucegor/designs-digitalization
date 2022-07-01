@@ -1,53 +1,182 @@
-Nuevo diseño de <%= @user.responsible %>
-<div class="container">
-  <%= simple_form_for(design) do |f| %>
-    <% case @user.role %>
+<%= simple_form_for(design) do |f| %>
+<% case @user.role %>
     <% when "production_manager"  %>
-      <%= f.input :project_number, input_html: {value: design.project_number, readonly: "readonly" }, label: "Número de proyecto" %>
-      <%= f.input :client, input_html: {value: design.client, readonly: "readonly" }, label: "Cliente" %>
-      <%= f.input :project_name, input_html: {value: design.project_name, readonly: "readonly" }, label: "Nombre del proyecto" %>
-      <%= f.input :revision, input_html: {value: design.revision, readonly: "readonly" }, label: "Número de revisión del plano" %>
-      <%= f.input :line, label: "Linea de producción" %>
-      <% if design.status == 'activo' %>
-        <div class="form-check form-switch">
-        <%= f.input :status, class: "form-check-input", label: "Activo",
-                    as: :boolean,
-                    checked_value: "activo",
-                    unchecked_value: "inactivo",
-                    input_html: {
-                      checked: design.status == "activo" ? "checked" : "" #this line changes the status of the checkbox
-                    } %>
-          </div>
-      <% end %>
-    <% when "engineer" %>
-      <%= f.input :project_number, label: "Número de proyecto" %>
-      <%= f.input :client, label: "Cliente" %>
-      <%= f.input :project_name, label: "Nombre del proyecto" %>
-      <%= f.input :revision, label: "Número de revisión del plano" %>
-      <%= f.input :autodesk_link, label: "Link del visor 3D" %>
-      <%= f.input :server_path, label: "Ruta del servidor" %>
-      <%= f.file_field :document%>
-      <%= f.input :responsible, input_html: {value: @user.responsible, readonly: "readonly" }, label: "Ingeniero a cargo"  %>
-    <% when "engineering_manager" %>
-      <%= f.input :project_number, label: "Número de proyecto" %>
-      <%= f.input :client, label: "Cliente" %>
-      <%= f.input :project_name, label: "Nombre del proyecto" %>
-      <%= f.input :revision, label: "Número de revisión del plano" %>
-      <%= f.input :autodesk_link, label: "Link del visor 3D" %>
-      <%= f.input :server_path, label: "Ruta del servidor" %>
-      <%= f.file_field :document%>
-      <%= f.input :line, label: "Linea de producción" %>
-          <div class="form-check form-switch">
-          <%= f.input :status, class: "form-check-input", label: "Activo",
-                      as: :boolean,
-                      checked_value: "activo",
-                      unchecked_value: "inactivo",
-                      input_html: {
-                        checked: design.status == "activo" ? "checked" : "" #this line changes the status of the checkbox
-                      } %>
+    <%# Production manager case starts %>
+    <div class="container register" id="test-div-form">
+        <div class="row">
+            <div class="col-md-3 register-left">
+                <%= image_tag "favicon.ico" %>
+                <h3>Hola, <%= @user.responsible %></h3>
+                <p class="text-light">Ingresa los datos de tu diseño.</p>
+                <%= f.submit "Guardar", class: "modal-button" %>
             </div>
-    <% end %>
-    <%= f.input :user_id, label: "📑", input_html: {value: @user.id, readonly: "readonly", class: 'visually-hidden' }  %>
-    <%= f.submit "Guardar", class: "modal-button" %>
+
+            <div class="col-md-9 register-right">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <h3 class="register-heading">Crear o editar un diseño</h3>
+                        <div class="row register-form">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <%= f.input :project_number, input_html: {value: design.project_number, readonly: "readonly" }, placeholder: "Número de proyecto", label: false %>
+                                </div>
+                                <div class="form-group">
+                                    <%= f.input :client, input_html: {value: design.client, readonly: "readonly" }, placeholder: "Cliente", label: false %>
+                                </div>
+
+                                <div class="form-group">
+                                    <%= f.input :line, placeholder: "Linea de producción", label: false %>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <%= f.input :project_name, input_html: {value: design.project_name, readonly: "readonly" }, placeholder: "Nombre del proyecto", label: false %>
+                                </div>
+                                <div class="form-group">
+                                    <%= f.input :revision, input_html: {value: design.revision, readonly: "readonly" }, placeholder: "Número de revisión del plano", label: false %>
+                                </div>
+                                <div class="form-group">
+                                     <% if design.status == 'activo' %>
+                                        <div class="form-check form-switch">
+                                        <%= f.input :status, class: "form-check-input", label: "Activo",
+                                                    as: :boolean,
+                                                    checked_value: "activo",
+                                                    unchecked_value: "inactivo",
+                                                    input_html: {
+                                                      checked: design.status == "activo" ? "checked" : "" #this line changes the status of the checkbox
+                                                    } %>
+                                          </div>
+                                      <% end %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%# Production manager case ends %>
+
+        <%# Engineer case starts %>
+      <% when "engineer" %>
+      <div class="container register" id="test-div-form">
+        <div class="row">
+            <div class="col-md-3 register-left">
+                <%= image_tag "favicon.ico" %>
+                <h3>Hola, <%= @user.responsible %></h3>
+                <p class="text-light">Ingresa los datos de tu diseño.</p>
+                <%= f.submit "Guardar", class: "modal-button" %>
+            </div>
+
+            <div class="col-md-9 register-right">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <h3 class="register-heading">Crear o editar un diseño</h3>
+                        <div class="row register-form">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                  <%= f.input :project_number, placeholder: "Número de proyecto", label: false %>
+                                </div>
+                                <div class="form-group">
+                                  <%= f.input :client, placeholder: "Cliente", label: false %>
+                                </div>
+                                <div class="form-group">
+                                  <%= f.input :project_name, placeholder: "Nombre del proyecto", label: false %>
+                                </div>
+                                <div class="form-group">
+                                  <%= f.input :revision, placeholder: "Número de revisión del plano", label: false %>
+                                </div>
+                                <div class="form-group">
+                                    <%= f.input :server_path, placeholder: "Ruta del servidor", label: false %>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                  <%= f.input :responsible, input_html: {value: @user.responsible, readonly: "readonly" }, placeholder: "Ingeniero a cargo: ", label: false  %>
+                                </div>
+                                <div class="form-group">
+                                  <%= f.input :autodesk_link, placeholder: "Link del visor 3D", label: false %>
+                                </div>
+                                <div class="form-group">
+                                  <%= link_to "Cargar modelo 3D", "https://viewer.autodesk.com/", target: "_blank", class: "btn btn-outline-dark rounded-pill"  %>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                  <%= f.file_field :document, class: "form-control" %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%# Engineer case ends %>
+
+        <%# Engineer manager case starts %>
+      <% when "engineering_manager" %>
+      <div class="container register" id="test-div-form">
+        <div class="row">
+            <div class="col-md-3 register-left">
+                <%= image_tag "favicon.ico" %>
+                <h3>Hola, <%= @user.responsible %></h3>
+                <p class="text-light">Ingresa los datos de tu diseño.</p>
+                <%= f.submit "Guardar", class: "modal-button" %>
+            </div>
+
+            <div class="col-md-9 register-right">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <h3 class="register-heading">Crear o editar un diseño</h3>
+                        <div class="row register-form">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                  <%= f.input :project_number, placeholder: "Número de proyecto", label: false %>
+                                </div>
+                                <div class="form-group">
+                                  <%= f.input :client, placeholder: "Cliente", label: false %>
+                                </div>
+                                <div class="form-group">
+                                  <%= f.input :project_name, placeholder: "Nombre del proyecto", label: false %>
+                                </div>
+                                <div class="form-group">
+                                  <%= f.input :revision, placeholder: "Número de revisión del plano", label: false %>
+                                </div>
+                                <div class="form-group">
+                                  <%= f.input :line, placeholder: "Linea de producción", label: false %>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                  <%= f.input :autodesk_link, placeholder: "Link del visor 3D", label: false %>
+                                </div>
+                                <div class="form-group">
+                                  <%= link_to "Cargar modelo 3D", "https://viewer.autodesk.com/", target: "_blank", class: "btn btn-outline-dark rounded-pill"  %>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                  <%= f.file_field :document, class: "form-control" %>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                  <div class="form-check form-switch">
+                                  <%= f.input :status, class: "form-check-input", label: "Activo",
+                                              as: :boolean,
+                                              checked_value: "activo",
+                                              unchecked_value: "inactivo",
+                                              input_html: {
+                                                checked: design.status == "activo" ? "checked" : "" #this line changes the status of the checkbox
+                                              } %>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+  </div>
+        <%# Engineer manager case end %>
   <% end %>
-</div>
+  <%= f.input :user_id, label: false, input_html: {value: @user.id, readonly: "readonly", class: 'visually-hidden' }  %>
+<% end %>

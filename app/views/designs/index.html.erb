@@ -33,30 +33,23 @@ of Simple CSS Waves-->
 
 
 
-  <div class="d-flex justify-content-end m-3" id="index-options">
+<div class="d-flex justify-content-end m-3" id="index-options">
 
-    <%= form_tag designs_path, id: "content", method: :get, class: "d-flex justify-content-between" do %>
-      <%= text_field_tag :query, params[:query], class: "form-control", id: "floatingInput", placeholder: "Buscar un diseño" %>
-      <button type="reset" class="btn btn-outline-primary" id="search-btn">Buscar</button>
-      <%= link_to "Reestablecer", designs_path, class: "btn btn-outline-secondary" %>
-    <% end %>
+  <% if policy(Design).create? && @user.role != 'employee' && @user.role != 'production_manager' %>
+    <%= link_to (image_tag "new-design", class: "button-images") + "  Nuevo diseño", new_design_path, class: 'align-self-center rounded-pill m-5 main-btn-designs' %> <br>
+  <% end %>
 
-  </div>
+  <%= form_tag designs_path, id: "content", method: :get, class: "d-flex justify-content-between" do %>
+    <%= text_field_tag :query, params[:query], class: "form-control", id: "floatingInput", placeholder: "Buscar un diseño" %>
+    <button type="reset" class="btn btn-outline-primary" id="search-btn">Buscar</button>
+    <%= link_to "Reestablecer", designs_path, class: "btn btn-outline-secondary" %>
+  <% end %>
 
-<!--Main row starts-->
-<div class="row">
+</div>
 
-  <div class="col d-flex flex-column m-5 p-2" id="index-options">
-    <% if policy(Design).create? && @user.role != 'employee' && @user.role != 'production_manager' %>
-      <%= link_to (image_tag "new-design", class: "button-images") + "Nuevo diseño", new_design_path, class: 'btn btn-secondary align-self-center rounded-pill m-5 main-btn-designs' %> <br>
-    <% end %>
+<div class="d-flex">
 
-    <% if policy(Design).all_designs? && @user.role != 'employee' %>
-      <%= link_to (image_tag "all-designs", class: "button-images") + "Todos los diseños", all_designs_path, class: 'btn btn-dark align-self-center rounded-pill m-5 main-btn-designs' %>
-    <% end %>
-  </div>
-
-  <div class="col-6 container vertical-scrollable" id="designs-cards">
+  <div class="container vertical-scrollable" id="designs-cards">
     <div class="row">
       <%  @designs.each do |design|%>
         <div class="card-product">
@@ -71,15 +64,14 @@ of Simple CSS Waves-->
           </div>
           <div class="card-buttons">
             <% if @user.role == 'engineer' || @user.role == 'production_manager' %>
-              <h6> <%= link_to "Editar información", edit_design_path(design) %> </h6>
+              <h6> <%= link_to "Editar ✏️", edit_design_path(design), class: "btn btn-outline-dark rounded-pill" %> </h6>
             <% end %>
-            <h6> <%= link_to "Detalles del  diseño", design_path(design) %> </h6>
-            <h6> <%= link_to "Ver 3D", design.autodesk_link, target: :_blank %> </h6>
+            <h6> <%= link_to "Ver 🔎", design_path(design), class: "btn btn-outline-dark rounded-pill" %> </h6>
+            <% if design.autodesk_link.present? %>
+              <h6> <%= link_to "3D 🧊", design.autodesk_link, target: :_blank, class: "btn btn-outline-dark rounded-pill" %> </h6>
+            <% end %>
           </div>
         </div>
       <% end %>
     </div>
-  </div>
-
-
-</div><!--Main row ends-->
+</div>
