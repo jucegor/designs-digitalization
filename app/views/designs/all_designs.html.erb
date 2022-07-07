@@ -1,42 +1,69 @@
-<div class="container">
-  Diseños elaborados por: <%= @user.responsible %> <br>
-  Id: <%= @user.id %> <br>
-  Email: <%= @user.email %> <br>
-  Rol: <%= @user.role %>
-</div>
-<%= link_to "Ver diseños", designs_path, class: "btn btn-primary" %>
-<table class="table table-hover table-dark data-table">
-  <thead>
-    <tr>
-      <th scope="col">No. Proyecto</th>
-      <th scope="col">Cliente</th>
-      <th scope="col">Nombre del proyecto</th>
-      <th scope="col">Revisión</th>
-      <th scope="col">Autodesk Viewer</th>
-      <th scope="col">Serverbioin</th>
-      <th scope="col">Última modificación</th>
-      <th scope="col">Estatus</th>
-      <th scope="col">Plano</th>
-    </tr>
-  </thead>
-  <tbody>
-  <% @designs.each do |design| %>
-    <tr>
-      <td> <%= link_to design.project_number, design_path(design) %> </td>
-      <td> <%= design.client %> </td>
-      <td> <%= design.project_name %> </td>
-      <td> <%= design.revision %> </td>
-      <td> <%= design.autodesk_link %> </td>
-      <td> <%= design.server_path %> </td>
-      <td> <%= design.updated_at.localtime %> </td>
-      <td> <%= design.status %> </td>
-      <% if design.document.present? %>
-        <td> <%= link_to "SI", design.document %> </td>
-      <% else %>
-        <td> NO </td>
-      <% end %>
 
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+<div class="header">
+
+  <!--Content before waves-->
+  <div class="inner-header flex">
+    <h1>Todos los diseños</h1>
+  </div>
+
+  <!--Waves Container-->
+  <div>
+    <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+    <defs>
+    <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+    </defs>
+    <g class="parallax">
+    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7)" />
+    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+    <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+    </g>
+    </svg>
+  </div>
+  <!--Waves end-->
+
+</div>
+<!--Header ends-->
+
+<div class="d-flex flex-column" id="home-icon">
+  <%= link_to image_tag("home"), designs_path%>
+  <p>Regresar al inicio</p>
+</div>
+
+
+
+
+<div class="container" id="all-designs-table">
+  <table class="table table-hover table-dark data-table">
+    <thead>
+      <tr>
+        <th scope="col">No. Proyecto</th>
+        <th scope="col">Cliente</th>
+        <th scope="col">Nombre del proyecto</th>
+        <th scope="col">Revisión</th>
+        <th scope="col">Última modificación</th>
+        <th scope="col">Estatus</th>
+        <th scope="col">Plano</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @designs.each do |design| %>
+      <tr>
+        <td> <%= link_to design.project_number, design_path(design), class: "btn btn-outline-light" %> </td>
+        <td> <%= design.client %> </td>
+        <td> <%= design.project_name %> </td>
+        <td> <%= design.revision %> </td>
+        <td> <%= design.updated_at.localtime.to_formatted_s(:db) %> </td>
+        <td> <%= design.status %> </td>
+        <% if design.document.present? %>
+          <td> <%= link_to "SI", design.document %> </td>
+        <% else %>
+          <td> NO </td>
+        <% end %>
+
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

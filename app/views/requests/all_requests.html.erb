@@ -1,32 +1,88 @@
-<br> <br> <br>
-<div class="container">
-  <h1>Nueva solicitud de diseño</h1>
-  <div class="d-flex justify-content-between">
-    <%= link_to "Proyecto Existente", new_request_path, class: 'btn btn-secondary' %> <br>
-    <%= link_to "Proyecto Nuevo", new_project_path, class: 'btn btn-secondary' %> <br>
+
+<div class="header">
+
+  <!--Content before waves-->
+  <div class="inner-header flex">
+    <h1>Solicitudes de diseño</h1>
+  </div>
+
+  <!--Waves Container-->
+  <div>
+    <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+    <defs>
+    <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+    </defs>
+    <g class="parallax">
+    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7)" />
+    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+    <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+    </g>
+    </svg>
+  </div>
+  <!--Waves end-->
+
+</div>
+<!--Header ends-->
+
+<div class="d-flex flex-column" id="home-icon">
+  <%= link_to image_tag("home"), designs_path%>
+  <p>Regresar al inicio</p>
+</div>
+
+<div id="all-designs-table">
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary rounded-pill position-absolute top-0 end-0 m-3 shadow-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Nueva solicitud
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Nueva solicitud de diseño</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body d-flex justify-content-between">
+          <%= link_to "Proyecto Existente", new_request_path, class: "btn btn-outline-secondary rounded-pill" %>
+          <%= link_to "Proyecto Nuevo", new_project_path, class: "btn btn-outline-success rounded-pill" %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="container" class="m-5">
+    <table class="table table-hover data-table">
+      <thead>
+        <tr>
+          <th scope="col">Número de proyecto</th>
+          <th scope="col">Nombre del proyecto</th>
+          <th scope="col">Fecha requerida</th>
+          <th scope="col">Estatus <br>🚩|✅</th>
+          <th scope="col">Request</th>
+          <th scope="col">Delete</th>
+          <th scope="col">Creación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @requests.each do |request| %>
+        <tr>
+          <th scope="row"><%= request.project_number_req %></th>
+          <td><%= request.design.project_name %></td>
+          <td><%= request.required_date %></td>
+          <td><%= ((request.design.id == 1) || (request.status == "pending")) ? '🚩': '✅' %></td>
+          <td><%= request.created_at.in_time_zone("Mexico City").strftime("%Y/%m/%d %H:%m") %></td>
+          <td><%= link_to "Editar", edit_request_path(request), class: "btn btn-outline-dark rounded-pill" %></td>
+          <td><%= link_to "Eliminar", request_path(request), method: "delete", class: "btn btn-outline-danger rounded-pill" %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>
-<table class="table table-hover data-table">
-  <thead>
-    <tr>
-      <th scope="col">Número de proyecto</th>
-      <th scope="col">Nombre del proyecto</th>
-      <th scope="col">Fecha requerida</th>
-      <th scope="col">Estatus <br>🚩|✅</th>
-      <th scope="col">Request</th>
-      <th scope="col">Delete</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @requests.each do |request| %>
-    <tr>
-      <th scope="row"><%= request.project_number_req %></th>
-      <td><%= request.design.project_name %></td>
-      <td><%= request.required_date %></td>
-      <td><%= ((request.design.id == 1) || (request.status == "pending")) ? '🚩': '✅' %></td>
-      <td><%= link_to "Editar", edit_request_path(request) %></td>
-      <td><%= link_to "Eliminar", request_path(request), method: "delete" %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
