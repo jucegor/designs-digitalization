@@ -49,6 +49,10 @@ class DesignsController < ApplicationController
 
   def show
     @user = current_user
+    @comment = Comment.new
+    @comments = Comment.where(design_id: params[:id]).order(id: :desc)
+    @answer = Answer.new
+    @answers = Answer.all.order(id: :desc)
   end
 
   def update
