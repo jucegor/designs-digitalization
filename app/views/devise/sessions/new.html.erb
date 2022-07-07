@@ -1,20 +1,58 @@
-<h2>Log in</h2>
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: false,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
-    <%= f.input :password,
-                required: false,
-                input_html: { autocomplete: "current-password" } %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+
+<section class="vh-100" style="background-color: #414142;">
+  <div class="container py-5 h-100" style="overflow-y: hidden">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+        <div class="card" style="border-radius: 1rem;">
+          <div class="row g-0">
+            <div class="col-md-6 col-lg-5 d-none d-md-block">
+              <%= image_tag "welder-vertical", class: "img-fluid", style: "border-radius: 1rem 0 0 1rem; filter: sepia(100%) hue-rotate(190deg) saturate(300%);" %>
+            </div>
+            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+              <div class="card-body p-4 p-lg-5 text-black">
+                <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+                  <div class="d-flex align-items-center mb-3 pb-1">
+                    <%= image_tag "favicon", class: "m-1" %>
+                    <span class="h4 fw-bold mb-0">Digitalización de planos</span>
+                  </div>
+
+                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Inicia sesión en tu cuenta:</h5>
+
+                  <div class="form-outline mb-4">
+                  <%= f.input :email,
+                              required: false,
+                              autofocus: true,
+                              input_html: { autocomplete: "email" },
+                              class: "form-control form-control-lg",
+                              label: "Email" %>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                  <%= f.input :password,
+                              required: false,
+                              input_html: { autocomplete: "current-password" },
+                              class: "form-control form-control-lg",
+                              label: "Contraseña" %>
+                  </div>
+
+                  <div class="pt-1 mb-4">
+                    <%= f.button :submit, "Iniciar sesión", class: "btn btn-dark btn-lg btn-block" %>
+                  </div>
+
+                  <%= f.check_box :remember_me, as: :boolean if devise_mapping.rememberable? %>
+                  <%= f.label :remember_me, "Recordar mi usuario" %>
+                  <br>
+                  <br>
+                  <%= render "devise/shared/links" %>
+
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</section>

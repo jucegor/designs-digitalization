@@ -1,39 +1,80 @@
-<div class="container">
-  Diseños elaborados por: <%= @user.responsible %> <br>
-  Id: <%= @user.id %> <br>
-  Email: <%= @user.email %> <br>
-  Rol: <%= @user.role %>
+<%= render 'shared/sidebar' %>
+
+<!--Hey! This is the original version
+of Simple CSS Waves-->
+
+<div class="header">
+
+  <!--Content before waves-->
+  <div class="inner-header flex">
+    <h1>Diseños Activos</h1>
+  </div>
+
+  <!--Waves Container-->
+  <div>
+    <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+    <defs>
+    <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+    </defs>
+    <g class="parallax">
+    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7)" />
+    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+    <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+    </g>
+    </svg>
+  </div>
+  <!--Waves end-->
+
 </div>
+<!--Header ends-->
 
-<div class="container">
-<% if policy(Design).create? && @user.role != 'employee' %>
-  <%= link_to "Nuevo diseño", new_design_path, class: 'btn btn-secondary' %> <br>
-<% end %>
 
-<% if policy(Design).all_designs? && @user.role != 'employee' %>
-  <%= link_to "Todos los diseños", all_designs_path, class: 'btn btn-secondary' %>
-<% end %>
-</div>
 
-<div class="container">
-<%  @designs.each do |design|%>
-<div class="card-product">
-  <% if design.document.present? %>
-    <%= link_to (image_tag design.document.preview(resize_to_limit: [200, 200])), design.document, target: :_blank %>
-  <% else %>
-    <%= image_tag 'BIOIN-screen.png' %>
+<div class="d-flex justify-content-end m-3" id="index-options">
+
+  <% if @user.role = 'employee' %>
+    <p class="text-end fs-2 mx-5">Bienvenido, <%= @user.responsible %></p>
   <% end %>
-  <div class="card-product-infos">
-    <h2><%= design.project_number %></h2>
-    <p><%= design.project_name %><strong> | Revisión: <%= design.revision %></strong></p>
-  </div>
-  <div class="card-buttons">
-    <% if @user.role == 'engineer' || @user.role == 'production_manager' %>
-      <h6> <%= link_to "Editar información", edit_design_path(design) %> </h6>
-    <% end %>
-    <h6> <%= link_to "Detalles del  diseño", design_path(design) %> </h6>
-    <h6> <%= link_to "Ver 3D", design.autodesk_link, target: :_blank %> </h6>
-  </div>
+
+  <% if policy(Design).create? && @user.role != 'employee' && @user.role != 'production_manager' %>
+    <%= link_to (image_tag "new-design", class: "button-images") + "  Nuevo diseño", new_design_path, class: 'align-self-center rounded-pill m-5 main-btn-designs' %> <br>
+  <% end %>
+
+  <%= form_tag designs_path, id: "content", method: :get, class: "d-flex justify-content-between" do %>
+    <%= text_field_tag :query, params[:query], class: "form-control", id: "floatingInput", placeholder: "Buscar un diseño" %>
+    <button type="reset" class="btn btn-outline-primary" id="search-btn">Buscar</button>
+    <%= link_to "Reestablecer", designs_path, class: "btn btn-outline-secondary" %>
+  <% end %>
+
 </div>
-<% end %>
+
+<div class="d-flex">
+
+  <div class="container vertical-scrollable" id="designs-cards">
+    <div class="row">
+      <%  @designs.each do |design|%>
+        <div class="card-product">
+          <% if design.document.present? %>
+            <%= link_to (image_tag design.document.preview(resize_to_limit: [200, 200])), design.document, target: :_blank %>
+          <% else %>
+            <%= image_tag 'BIOIN-screen.png' %>
+          <% end %>
+          <div class="card-product-infos">
+            <h2><%= design.project_number %></h2>
+            <p><%= design.project_name %><strong> | Revisión: <%= design.revision %></strong></p>
+          </div>
+          <div class="card-buttons">
+            <% if @user.role == 'engineer' || @user.role == 'production_manager' %>
+              <h6> <%= link_to "Editar ✏️", edit_design_path(design), class: "btn btn-outline-dark rounded-pill" %> </h6>
+            <% end %>
+            <h6> <%= link_to "Ver 🔎", design_path(design), class: "btn btn-outline-dark rounded-pill" %> </h6>
+            <% if design.autodesk_link.present? %>
+              <h6> <%= link_to "3D 🧊", design.autodesk_link, target: :_blank, class: "btn btn-outline-dark rounded-pill" %> </h6>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
 </div>

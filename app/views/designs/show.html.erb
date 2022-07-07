@@ -1,30 +1,263 @@
-Número de proyecto: <%=  @design.project_number  %> <br>
-Cliente: <%=  @design.client  %> <br>
-Número de proyecto: <%=  @design.project_name  %> <br>
-Ingeniero a cargo: <%=  @design.responsible  %> <br>
-Revisión: <%=  @design.revision  %> <br>
-Linea de producción: <%=  @design.line  %> <br>
-<% if @user.role == "engineering_manager" || @user.role == "engineer" %>
-  Estatus: <%=  @design.status  %> <br>
-  Link visor 3D: <%=  @design.autodesk_link  %> <br>
-  Ruta del servidor: <%=  @design.server_path  %> <br>
-<% end %>
-<% if @design.document.present? %>
-  <%= link_to (image_tag @design.document.preview(resize_to_limit: [200, 200]), style: "width: 250px; height: auto"), @design.document, target: :_blank %>
-<% else %>
-  <%= image_tag "BIOIN-screen.png", style: "width: 250px; height: auto" %>
-<% end %>
-<br>
-<%= link_to "Ver diseños", designs_path, class: "btn btn-primary" %>
 
-<% if policy(@design).edit? || @user.role == "engineer" %>
-  <%= link_to "Editar información", edit_design_path(@design) , class: "btn btn-primary" %>
-<% end %>
-
-<% if @user.role == "engineering_manager" && policy(@design).destroy? %>
-  <%= link_to "Eliminar", design_path(@design), method: "delete", class: "btn btn-primary" %>
-<% end %>
 
 
 <%= render "comments/commets_form", comment: @comment, user: @user, design: @design %>
 <%= render "comments/commets", comments: @comments, answer: @answer, user: @user, answers: @answers %>
+
+<%# profile starts %>
+<section class="h-100 gradient-custom-2">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="container px-5">
+        <div class="card">
+          <div class="rounded-top text-white d-flex flex-row" style="background-color: #414142;">
+            <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
+              <%= link_to "← Regresar", designs_path, class: "btn btn-outline-light mt-2" %>
+              <% if policy(@design).edit? || @user.role == "engineer" %>
+                <%= link_to "Editar", edit_design_path(@design), class: "btn btn-outline-light mt-2", style: "z-index: 1;" %>
+              <% end %>
+              <% if @user.role == "engineering_manager" && policy(@design).destroy? %>
+                <%= link_to "Eliminar", design_path(@design), method: "delete", class: "btn btn-outline-light mt-2", style: "z-index: 1;" %>
+              <% end %>
+              <% if @design.document.present? %>
+                <%= link_to (image_tag @design.document.preview(resize_to_limit: [200, 200]), class: "img-fluid img-thumbnail mt-4 mb-2", style: "width: 250px; height: auto; z-index: 1"), @design.document, target: :_blank %>
+              <% else %>
+                <%= image_tag "BIOIN-screen.png", style: "width: 250px; height: auto; z-index: 1", class: "img-fluid img-thumbnail mt-4 mb-2" %>
+              <% end %>
+            </div>
+            <div class="ms-3 d-flex align-items-center">
+              <div>
+                <h2><%=  @design.project_number  %></h2>
+                <h5><%=  @design.project_name  %></h5>
+                <p class="text-light"><%=  @design.client  %></p>
+              </div>
+            </div>
+          </div>
+          <div class="p-4 text-black" style="background-color: #f8f9fa;">
+            <div class="d-flex justify-content-between text-center py-1">
+              <div>
+                <p class="mb-1 h5">0</p>
+                <p class="small text-muted mb-0">Comentarios</p>
+              </div>
+              <div class="px-3">
+                <p class="mb-1 h5">0</p>
+                <p class="small text-muted mb-0">Fotos</p>
+              </div>
+              <div>
+                <p class="mb-1 h5">0</p>
+                <p class="small text-muted mb-0">HCC</p>
+              </div>
+            </div>
+          </div>
+          <div class="card-body p-4 text-black">
+            <div class="mb-5">
+              <p class="lead fw-normal mb-1">Detalles del diseño</p>
+              <div class="p-4" style="background-color: #f8f9fa;">
+                <p class="font-italic mb-1"><strong>Responsable: </strong> <br> <%=  @design.responsible  %></p> <br>
+                <p class="font-italic mb-1"><strong>Última revisión del plano: <br> </strong> <%=  @design.revision  %></p> <br>
+                <p class="font-italic mb-1"><strong>Linea de producción: </strong> <br> <%=  @design.line  %></p> <br>
+                <% if @user.role == "engineering_manager" || @user.role == "engineer" %>
+                <p class="font-italic mb-1"><strong>Estatus: </strong> <br> <%=  @design.status  %></p> <br>
+                <p class="font-italic mb-1"><strong>Link visor 3D: </strong> <br> <%=  @design.autodesk_link  %></p> <br>
+                <p class="font-italic mb-1"><strong>Ruta del servidor: </strong> <br> <%=  @design.server_path  %></p> <br>
+                <% end %>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <p class="lead fw-normal mb-0">Últimas fotos</p>
+              <p class="mb-0"><a href="#!" class="text-muted">Ver todo</a></p>
+            </div>
+            <div class="row g-2">
+              <div class="col mb-2">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp"
+                  alt="image 1" class="w-100 rounded-3">
+              </div>
+              <div class="col mb-2">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp"
+                  alt="image 1" class="w-100 rounded-3">
+              </div>
+            </div>
+            <div class="row g-2">
+              <div class="col">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(108).webp"
+                  alt="image 1" class="w-100 rounded-3">
+              </div>
+              <div class="col">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(114).webp"
+                  alt="image 1" class="w-100 rounded-3">
+              </div>
+            </div>
+
+  <div class="container my-5 py-5">
+    <div class="row d-flex justify-content-center">
+      <div>
+        <div class="card">
+          <div class="card-body p-4">
+            <h4 class="text-left font-italic mb-4 pb-2">Comentarios del diseño</h4>
+
+            <div class="row">
+              <div class="col">
+                <div class="d-flex flex-start">
+                  <img class="rounded-circle shadow-1-strong me-3"
+                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp" alt="avatar" width="65"
+                    height="65" />
+                  <div class="flex-grow-1 flex-shrink-1">
+                    <div>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <p class="mb-1">
+                          Maria Smantha <span class="small">- 2 hours ago</span>
+                        </p>
+                        <a href="#!"><i class="fas fa-reply fa-xs"></i><span class="small"> reply</span></a>
+                      </div>
+                      <p class="small mb-0">
+                        It is a long established fact that a reader will be distracted by
+                        the readable content of a page.
+                      </p>
+                    </div>
+
+                    <div class="d-flex flex-start mt-4">
+                      <a class="me-3" href="#">
+                        <img class="rounded-circle shadow-1-strong"
+                          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(11).webp" alt="avatar"
+                          width="65" height="65" />
+                      </a>
+                      <div class="flex-grow-1 flex-shrink-1">
+                        <div>
+                          <div class="d-flex justify-content-between align-items-center">
+                            <p class="mb-1">
+                              Simona Disa <span class="small">- 3 hours ago</span>
+                            </p>
+                          </div>
+                          <p class="small mb-0">
+                            letters, as opposed to using 'Content here, content here',
+                            making it look like readable English.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="d-flex flex-start mt-4">
+                      <a class="me-3" href="#">
+                        <img class="rounded-circle shadow-1-strong"
+                          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar"
+                          width="65" height="65" />
+                      </a>
+                      <div class="flex-grow-1 flex-shrink-1">
+                        <div>
+                          <div class="d-flex justify-content-between align-items-center">
+                            <p class="mb-1">
+                              John Smith <span class="small">- 4 hours ago</span>
+                            </p>
+                          </div>
+                          <p class="small mb-0">
+                            the majority have suffered alteration in some form, by
+                            injected humour, or randomised words.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="d-flex flex-start mt-4">
+                  <img class="rounded-circle shadow-1-strong me-3"
+                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(12).webp" alt="avatar" width="65"
+                    height="65" />
+                  <div class="flex-grow-1 flex-shrink-1">
+                    <div>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <p class="mb-1">
+                          Natalie Smith <span class="small">- 2 hours ago</span>
+                        </p>
+                        <a href="#!"><i class="fas fa-reply fa-xs"></i><span class="small"> reply</span></a>
+                      </div>
+                      <p class="small mb-0">
+                        The standard chunk of Lorem Ipsum used since the 1500s is
+                        reproduced below for those interested. Sections 1.10.32 and
+                        1.10.33.
+                      </p>
+                    </div>
+
+                    <div class="d-flex flex-start mt-4">
+                      <a class="me-3" href="#">
+                        <img class="rounded-circle shadow-1-strong"
+                          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(31).webp" alt="avatar"
+                          width="65" height="65" />
+                      </a>
+                      <div class="flex-grow-1 flex-shrink-1">
+                        <div>
+                          <div class="d-flex justify-content-between align-items-center">
+                            <p class="mb-1">
+                              Lisa Cudrow <span class="small">- 4 hours ago</span>
+                            </p>
+                          </div>
+                          <p class="small mb-0">
+                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
+                            scelerisque ante sollicitudin commodo. Cras purus odio,
+                            vestibulum in vulputate at, tempus viverra turpis.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="d-flex flex-start mt-4">
+                      <a class="me-3" href="#">
+                        <img class="rounded-circle shadow-1-strong"
+                          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(29).webp" alt="avatar"
+                          width="65" height="65" />
+                      </a>
+                      <div class="flex-grow-1 flex-shrink-1">
+                        <div>
+                          <div class="d-flex justify-content-between align-items-center">
+                            <p class="mb-1">
+                              Maggie McLoan <span class="small">- 5 hours ago</span>
+                            </p>
+                          </div>
+                          <p class="small mb-0">
+                            a Latin professor at Hampden-Sydney College in Virginia,
+                            looked up one of the more obscure Latin words, consectetur
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="d-flex flex-start mt-4">
+                      <a class="me-3" href="#">
+                        <img class="rounded-circle shadow-1-strong"
+                          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar"
+                          width="65" height="65" />
+                      </a>
+                      <div class="flex-grow-1 flex-shrink-1">
+                        <div>
+                          <div class="d-flex justify-content-between align-items-center">
+                            <p class="mb-1">
+                              John Smith <span class="small">- 6 hours ago</span>
+                            </p>
+                          </div>
+                          <p class="small mb-0">
+                            Autem, totam debitis suscipit saepe sapiente magnam officiis
+                            quaerat necessitatibus odio assumenda, perferendis quae iusto
+                            labore laboriosam minima numquam impedit quam dolorem!
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<%# profile ends %>
+

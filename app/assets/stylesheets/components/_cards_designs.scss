@@ -36,5 +36,10 @@
 }
 
 .card-buttons{
-  text-align: right;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-buttons > h6{
+  padding: 0 1.5vw;
 }

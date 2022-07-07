@@ -1,0 +1,60 @@
+
+<nav class="main-menu">
+    <ul>
+       <li>
+          <a href="/designs" class="row">
+            <%= image_tag "welder", class:"image-icon m-2" %>
+            <span class="nav-text col">Diseños activos</span>
+          </a>
+        </li>
+        <% if policy(Design).all_designs? && @user.role != 'employee' %>
+        <li>
+          <a href="/all_designs" class="row">
+            <%= image_tag "all-designs", class:"image-icon m-2" %>
+            <span class="nav-text col">Todos los diseños</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="/designs/new" class="row">
+            <%= image_tag "new-design", class:"image-icon m-2" %>
+            <span class="nav-text col">Nuevo diseño</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="/requests" class="row">
+            <%= image_tag "designs-requests", class:"image-icon m-2" %>
+            <span class="nav-text col">Solicitudes de diseño</span>
+          </a>
+        </li>
+      <% end %>
+        <li>
+          <a href="#" class="row">
+            <%= image_tag "help", class:"image-icon m-2" %>
+            <span class="nav-text col">Ayuda</span>
+          </a>
+        </li>
+
+
+        <% if current_user.role == "engineering_manager" %>
+        <li>
+          <a href="#" class="row">
+            <%= image_tag "chart", class:"image-icon m-2" %>
+            <span class="nav-text col">Indicadores</span>
+          </a>
+        </li>
+        <% end %>
+    </ul>
+
+    <ul class="logout">
+        <li>
+          <%= link_to destroy_user_session_path, method: :delete, class: "row" do%>
+            <%= image_tag "log-out", class:"image-icon m-2" %>
+            <span class="nav-text col">
+                Cerrar sesión
+            </span>
+          <% end %>
+        </li>
+    </ul>
+</nav>
