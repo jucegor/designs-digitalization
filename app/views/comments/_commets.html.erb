@@ -1,0 +1,49 @@
+<div class="container">
+  <%  @comments.each do |f| %>
+  <div class="card m-2 col-12">
+  <div class="card-header">
+    <%=f.user  %>
+  </div>
+  <div class="card-body">
+  <p class="card-text"><%= f.comment%></p>
+  <% if f.annex.present? %>
+  <%= image_tag f.annex , style:'height:auto; width:450px;' %>
+  <% end %>
+  </div>
+  <div class="card-footer" align="right">
+  <a href=" <%= edit_comment_path(f.id) %>">Editar</a>
+
+  <%=link_to "Eliminar", comment_path(f.id), method: "delete" ,data: {confirm: 'Desea eliminar este comentario?'},class: "link" %>
+  </a>
+
+  </div>
+  <%= render "answers/answer_form", comment: f.id, answer: @answer, user: @user %>
+  </div>
+
+   <% @answers.each do |l| %>
+
+   <% if f.id == l.comment_id %>
+    <div >
+    <h3>
+    <%= l.user %>
+    </h3>
+    <p>
+    <%=l.answer %>
+    </p>
+    <% if l.answerimg.present? %>
+    <%= image_tag l.answerimg , style:'height:auto; width:450px;' %>
+    <% end %>
+    </div>
+   <% end %>
+  <div class="card-footer" align="right">
+  <a href=" <%= edit_answer_path(l.id) %>">Editar</a>
+
+  <%=link_to "Eliminar", answer_path(l.id), method: "delete" ,data: {confirm: 'Desea eliminar este comentario?'},class: "link" %>
+  </a>
+
+  </div>
+  <% end %>
+  <% end %>
+
+
+</div>

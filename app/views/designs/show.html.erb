@@ -24,3 +24,7 @@ Linea de producción: <%=  @design.line  %> <br>
 <% if @user.role == "engineering_manager" && policy(@design).destroy? %>
   <%= link_to "Eliminar", design_path(@design), method: "delete", class: "btn btn-primary" %>
 <% end %>
+
+
+<%= render "comments/commets_form", comment: @comment, user: @user, design: @design %>
+<%= render "comments/commets", comments: @comments, answer: @answer, user: @user, answers: @answers %>

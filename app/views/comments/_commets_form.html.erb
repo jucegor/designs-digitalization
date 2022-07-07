@@ -1,0 +1,21 @@
+
+<div class="container">
+  <%= simple_form_for(comment) do |f| %>
+      <div class="row">
+      <%= f.input :user,as: :hidden, input_html: {value: user.responsible, readonly: "readonly" }%>
+      <%= f.input :design_id,as: :hidden, input_html: {value: design.id, readonly: "readonly"} %>
+      <%= f.input :comment, as: :text, label: "Comentario" %>
+      <div class="col-md-2">
+      <label for="lol" >
+      <%= image_tag "imagen.png" %>
+      <%= f.input :annex,as: :file, input_html: {style: "display: none; width:10px; ", id:"lol"}, label: false %>
+      </label>
+      </div>
+      <div class="col-md-10 d-md-flex justify-content-md-end ">
+      <%= f.submit "Guardar", class: "btn btn-primary" %>
+      </div>
+        <%= f.input :hcc, as: :boolean, checked_value: "activo",unchecked_value: "inactivo",class: "btn btn-primary col-2" %>
+      </div>
+      </div>
+  <% end %>
+</div>
