@@ -14,13 +14,19 @@
   border: none;
   border-radius: 1.5rem;
   padding: 2%;
-  width: 60%;
+  width: 45%;
   background: #f8f9fa;
   font-weight: bold;
   color: #383d41;
-  margin-top: 30%;
-  margin-bottom: 3%;
+  margin-top: 0%;
+  margin-bottom: 0%;
   cursor: pointer;
+  text-decoration: none;
+}
+
+.register-left input:hover{
+  background: #383d41;
+  color: #f8f9fa;
 }
 
 .register-right {

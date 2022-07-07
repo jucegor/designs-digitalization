@@ -7,8 +7,7 @@ of Simple CSS Waves-->
 
   <!--Content before waves-->
   <div class="inner-header flex">
-  <%= image_tag "blueprints" %>
-  <h1>Diseños Activos</h1>
+    <h1>Diseños Activos</h1>
   </div>
 
   <!--Waves Container-->
@@ -19,7 +18,7 @@ of Simple CSS Waves-->
     <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
     </defs>
     <g class="parallax">
-    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7)" />
     <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
     <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
     <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
@@ -34,6 +33,10 @@ of Simple CSS Waves-->
 
 
 <div class="d-flex justify-content-end m-3" id="index-options">
+
+  <% if @user.role = 'employee' %>
+    <p class="text-end fs-2 mx-5">Bienvenido, <%= @user.responsible %></p>
+  <% end %>
 
   <% if policy(Design).create? && @user.role != 'employee' && @user.role != 'production_manager' %>
     <%= link_to (image_tag "new-design", class: "button-images") + "  Nuevo diseño", new_design_path, class: 'align-self-center rounded-pill m-5 main-btn-designs' %> <br>

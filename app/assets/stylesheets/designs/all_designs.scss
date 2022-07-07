@@ -1,3 +1,14 @@
 #all-designs-table{
-  margin: 25px 25px 0px 100px
+
+}
+
+#home-icon{
+  margin: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#home-icon > a > img{
+  width: 50px;
 }

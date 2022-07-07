@@ -8,7 +8,10 @@
                 <%= image_tag "favicon.ico" %>
                 <h3>Hola, <%= @user.responsible %></h3>
                 <p class="text-light">Ingresa los datos de tu diseño.</p>
-                <%= f.submit "Guardar", class: "modal-button" %>
+                <div class="d-flex justify-content-between">
+                  <%= f.submit "Guardar" %>
+                  <%= link_to "Cancelar", designs_path, class: "btn btn-outline-light rounded-pill" %>
+                </div>
             </div>
 
             <div class="col-md-9 register-right">
@@ -64,7 +67,10 @@
                 <%= image_tag "favicon.ico" %>
                 <h3>Hola, <%= @user.responsible %></h3>
                 <p class="text-light">Ingresa los datos de tu diseño.</p>
-                <%= f.submit "Guardar", class: "modal-button" %>
+                <div class="d-flex justify-content-between">
+                  <%= f.submit "Guardar" %>
+                  <%= link_to "Cancelar", designs_path, class: "btn btn-outline-light rounded-pill" %>
+                </div>
             </div>
 
             <div class="col-md-9 register-right">
@@ -120,7 +126,10 @@
                 <%= image_tag "favicon.ico" %>
                 <h3>Hola, <%= @user.responsible %></h3>
                 <p class="text-light">Ingresa los datos de tu diseño.</p>
-                <%= f.submit "Guardar", class: "modal-button" %>
+                <div class="d-flex justify-content-between">
+                  <%= f.submit "Guardar" %>
+                  <%= link_to "Cancelar", designs_path, class: "btn btn-outline-light rounded-pill" %>
+                </div>
             </div>
 
             <div class="col-md-9 register-right">
