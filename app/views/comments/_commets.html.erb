@@ -1,49 +1,82 @@
-<div class="container">
-  <%  @comments.each do |f| %>
-  <div class="card m-2 col-12">
-  <div class="card-header">
-    <%=f.user  %>
-  </div>
-  <div class="card-body">
-  <p class="card-text"><%= f.comment%></p>
-  <% if f.annex.present? %>
-  <%= image_tag f.annex , style:'height:auto; width:450px;' %>
-  <% end %>
-  </div>
-  <div class="card-footer" align="right">
-  <a href=" <%= edit_comment_path(f.id) %>">Editar</a>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <% @cont = 1 %>
+            <% @comments.each do |f| %>
+            <div class="d-flex flex-start mb-3">
+                <b class="capital" ><%= f.user.split(" ")[0][0] + f.user.split(" ")[1][0] %></b>
+                <div class="flex-grow-1 flex-shrink-1">
+                    <div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p class="m-2">
+                               <b><%=f.user %></b> <span class="small">
+                               <% if f.hcc == "activo" %>
+                                 - HCC
+                               <% end %>
+                               </span>
+                            </p>
+                            <div>
+                              <a href=" <%= edit_comment_path(f.id) %>" class="m-2"><i class="fa-solid fa-pen-to-square link-dark"></i></a>
+                              <%=link_to "" , comment_path(f.id), method: "delete" ,data:
+                                {confirm: 'Desea eliminar este comentario?' },class: "fa-solid fa-trash-can m-2 link-dark" %>
+                            </div>
+                        </div>
+                        <p class="small mb-0">
+                            <%= f.comment%>
+                        </p>
+                        <p class="small mb-0">
+                        <% if f.annex.present? %>
+                          <%= image_tag f.annex , class: "w-lg-50 w-md-100 rounded-3 img-fluid", style: "height: 300px;" %>
+                        <% end %>
+                        </p>
+                        <a class="btn btn-outline-dark m-2 rounded-pill sizebtn" data-bs-toggle="modal" data-bs-target="#modal<%=@cont%>"><span class="small">Responder</span></a>
+                    </div>
+                </div>
+            </div>
+            <!--modal-->
+            <div class="modal fade" id="modal<%=@cont%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Respuesta</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <%= render "answers/answer_form" , comment: f.id, answer: @answer, user: @user %>
+                  </div>
 
-  <%=link_to "Eliminar", comment_path(f.id), method: "delete" ,data: {confirm: 'Desea eliminar este comentario?'},class: "link" %>
-  </a>
+                </div>
+              </div>
+            </div>
+            <!--modal-->
+            <% @cont = @cont + 1 %>
+            <% @answers.each do |l| %>
+            <% if f.id==l.comment_id %>
+            <div class="d-flex flex-start mt-4 m-5">
+                <b class="capital" ><%= l.user.split(" ")[0][0] + l.user.split(" ")[1][0] %></b>
+                <div class="flex-grow-1 flex-shrink-1">
+                    <div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p class="m-2">
+                            <b >
+                                <%= l.user %>
+                            </b>
+                            </p>
 
-  </div>
-  <%= render "answers/answer_form", comment: f.id, answer: @answer, user: @user %>
-  </div>
-
-   <% @answers.each do |l| %>
-
-   <% if f.id == l.comment_id %>
-    <div >
-    <h3>
-    <%= l.user %>
-    </h3>
-    <p>
-    <%=l.answer %>
-    </p>
-    <% if l.answerimg.present? %>
-    <%= image_tag l.answerimg , style:'height:auto; width:450px;' %>
-    <% end %>
+                        </div>
+                        <p class="small mb-0">
+                            <%=l.answer %>
+                            <% if l.answerimg.present? %>
+                            <%= image_tag l.answerimg , class: "w-100 rounded-3 img-fluid" %>
+                            <% end %>
+                        </p>
+                        <a href=" <%= edit_answer_path(l.id) %>" class="m-1"><i class="fa-solid fa-pen-to-square link-dark"></i></a>
+                        <%=link_to "" , answer_path(l.id), method: "delete" ,data:
+                                            {confirm: 'Desea eliminar este comentario?' },class: "fa-solid fa-trash-can link-dark" %>
+                    </div>
+                </div>
+            </div>
+            <% end %>
+            <% end %>
+            <% end %>
+        </div>
     </div>
-   <% end %>
-  <div class="card-footer" align="right">
-  <a href=" <%= edit_answer_path(l.id) %>">Editar</a>
-
-  <%=link_to "Eliminar", answer_path(l.id), method: "delete" ,data: {confirm: 'Desea eliminar este comentario?'},class: "link" %>
-  </a>
-
-  </div>
-  <% end %>
-  <% end %>
-
-
-</div>

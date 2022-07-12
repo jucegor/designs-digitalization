@@ -20,7 +20,7 @@ class DesignsController < ApplicationController
     when 'production_manager', 'engineering_manager'
       @designs = Design.all
     when 'engineer'
-      @designs = Design.where(user: current_user).order("updated_at DESC")
+      @designs = Design.where(responsible: @user.responsible).order("updated_at DESC")
     end
     authorize @designs
   end
@@ -45,12 +45,31 @@ class DesignsController < ApplicationController
 
   def edit
     @user = current_user
+    @users = User.all
+    @responsible = @design.responsible
   end
 
   def show
     @user = current_user
     @comment = Comment.new
     @comments = Comment.where(design_id: params[:id]).order(id: :desc)
+    @hcc = Comment.where(design_id: params[:id]).where(hcc: "activo")
+    @hccs = Comment.where(design_id: params[:id]).where(hcc: "activo").count
+    @comments_count = Comment.where(design_id: params[:id]).count
+    @count_photo = 0
+    @comments.each do |photos_count|
+      photos_count.annex.present? ? @count_photo += 1 : next
+    end
+    @allphotos = []
+    @comments.each do |all|
+      all.annex.present? ? @allphotos.push(all.annex) : next
+    end
+    @lastphotos = []
+    @allphotos.each_with_index do |last, index|
+      if index <= 3
+        last.present? ? @lastphotos.push(last) : next
+      end
+    end
     @answer = Answer.new
     @answers = Answer.all.order(id: :desc)
   end

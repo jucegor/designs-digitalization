@@ -2,6 +2,7 @@ class Design < ApplicationRecord
   belongs_to :user
   has_one_attached :document
   has_many :request
+  has_many :comment, dependent: :destroy
 
   include PgSearch::Model
   pg_search_scope :global_search,

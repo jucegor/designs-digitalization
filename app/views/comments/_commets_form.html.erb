@@ -7,12 +7,12 @@
       <%= f.input :comment, as: :text, label: "Comentario" %>
       <div class="col-md-2">
       <label for="lol" >
-      <%= image_tag "imagen.png" %>
+      <i class="fa-solid fa-camera"></i>
       <%= f.input :annex,as: :file, input_html: {style: "display: none; width:10px; ", id:"lol"}, label: false %>
       </label>
       </div>
       <div class="col-md-10 d-md-flex justify-content-md-end ">
-      <%= f.submit "Guardar", class: "btn btn-primary" %>
+      <%= f.submit "Guardar", class: "btn btn-primary rounded-pill " %>
       </div>
         <%= f.input :hcc, as: :boolean, checked_value: "activo",unchecked_value: "inactivo",class: "btn btn-primary col-2" %>
       </div>
