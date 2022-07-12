@@ -1,9 +1,3 @@
-
-
-
-<%= render "comments/commets_form", comment: @comment, user: @user, design: @design %>
-<%= render "comments/commets", comments: @comments, answer: @answer, user: @user, answers: @answers %>
-
 <%# profile starts %>
 <section class="h-100 gradient-custom-2">
   <div class="container py-5 h-100">
@@ -20,7 +14,7 @@
                 <%= link_to "Eliminar", design_path(@design), method: "delete", class: "btn btn-outline-light mt-2", style: "z-index: 1;" %>
               <% end %>
               <% if @design.document.present? %>
-                <%= link_to (image_tag @design.document.preview(resize_to_limit: [200, 200]), class: "img-fluid img-thumbnail mt-4 mb-2", style: "width: 250px; height: auto; z-index: 1"), @design.document, target: :_blank %>
+                <%= link_to (image_tag @design.document.preview(resize_to_limit: [200, 200]), class: "img-fluid img-thumbnail mt-4 mb-2 hide", style: "width: 250px; height: auto; z-index: 1"), @design.document, target: :_blank %>
               <% else %>
                 <%= image_tag "BIOIN-screen.png", style: "width: 250px; height: auto; z-index: 1", class: "img-fluid img-thumbnail mt-4 mb-2" %>
               <% end %>
@@ -36,16 +30,20 @@
           <div class="p-4 text-black" style="background-color: #f8f9fa;">
             <div class="d-flex justify-content-between text-center py-1">
               <div>
-                <p class="mb-1 h5">0</p>
+                <p class="mb-1 h5"><%= @comments_count %></p>
                 <p class="small text-muted mb-0">Comentarios</p>
               </div>
               <div class="px-3">
-                <p class="mb-1 h5">0</p>
+                <p class="mb-1 h5">
+                <%= @count_photo %>
+                </p>
                 <p class="small text-muted mb-0">Fotos</p>
               </div>
               <div>
-                <p class="mb-1 h5">0</p>
+                <a id="as" data-bs-toggle="modal" data-bs-target="#Modalhcc">
+                <p class="mb-1 h5" for="as"><%= @hccs %></p>
                 <p class="small text-muted mb-0">HCC</p>
+                </a>
               </div>
             </div>
           </div>
@@ -65,194 +63,28 @@
             </div>
             <div class="d-flex justify-content-between align-items-center mb-4">
               <p class="lead fw-normal mb-0">Últimas fotos</p>
-              <p class="mb-0"><a href="#!" class="text-muted">Ver todo</a></p>
+              <p class="mb-0"><a data-bs-toggle="modal" data-bs-target="#photoModal" class="text-muted">Ver todo</a></p>
             </div>
             <div class="row g-2">
-              <div class="col mb-2">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp"
-                  alt="image 1" class="w-100 rounded-3">
+            <% @lastphotos.each do |f| %>
+              <div class="col-lg-6 col-md-12 mb-2 align-items-center">
+              <%= image_tag f , class: "w-lg-50 w-md-100  rounded-3 img-fluid", style: "height: 300px;" %>
               </div>
-              <div class="col mb-2">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp"
-                  alt="image 1" class="w-100 rounded-3">
-              </div>
+            <%end %>
             </div>
-            <div class="row g-2">
-              <div class="col">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(108).webp"
-                  alt="image 1" class="w-100 rounded-3">
-              </div>
-              <div class="col">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(114).webp"
-                  alt="image 1" class="w-100 rounded-3">
-              </div>
-            </div>
-
-  <div class="container my-5 py-5">
-    <div class="row d-flex justify-content-center">
-      <div>
-        <div class="card">
-          <div class="card-body p-4">
-            <h4 class="text-left font-italic mb-4 pb-2">Comentarios del diseño</h4>
-
-            <div class="row">
-              <div class="col">
-                <div class="d-flex flex-start">
-                  <img class="rounded-circle shadow-1-strong me-3"
-                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp" alt="avatar" width="65"
-                    height="65" />
-                  <div class="flex-grow-1 flex-shrink-1">
-                    <div>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <p class="mb-1">
-                          Maria Smantha <span class="small">- 2 hours ago</span>
-                        </p>
-                        <a href="#!"><i class="fas fa-reply fa-xs"></i><span class="small"> reply</span></a>
-                      </div>
-                      <p class="small mb-0">
-                        It is a long established fact that a reader will be distracted by
-                        the readable content of a page.
-                      </p>
-                    </div>
-
-                    <div class="d-flex flex-start mt-4">
-                      <a class="me-3" href="#">
-                        <img class="rounded-circle shadow-1-strong"
-                          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(11).webp" alt="avatar"
-                          width="65" height="65" />
-                      </a>
-                      <div class="flex-grow-1 flex-shrink-1">
-                        <div>
-                          <div class="d-flex justify-content-between align-items-center">
-                            <p class="mb-1">
-                              Simona Disa <span class="small">- 3 hours ago</span>
-                            </p>
-                          </div>
-                          <p class="small mb-0">
-                            letters, as opposed to using 'Content here, content here',
-                            making it look like readable English.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="d-flex flex-start mt-4">
-                      <a class="me-3" href="#">
-                        <img class="rounded-circle shadow-1-strong"
-                          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar"
-                          width="65" height="65" />
-                      </a>
-                      <div class="flex-grow-1 flex-shrink-1">
-                        <div>
-                          <div class="d-flex justify-content-between align-items-center">
-                            <p class="mb-1">
-                              John Smith <span class="small">- 4 hours ago</span>
-                            </p>
-                          </div>
-                          <p class="small mb-0">
-                            the majority have suffered alteration in some form, by
-                            injected humour, or randomised words.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="d-flex flex-start mt-4">
-                  <img class="rounded-circle shadow-1-strong me-3"
-                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(12).webp" alt="avatar" width="65"
-                    height="65" />
-                  <div class="flex-grow-1 flex-shrink-1">
-                    <div>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <p class="mb-1">
-                          Natalie Smith <span class="small">- 2 hours ago</span>
-                        </p>
-                        <a href="#!"><i class="fas fa-reply fa-xs"></i><span class="small"> reply</span></a>
-                      </div>
-                      <p class="small mb-0">
-                        The standard chunk of Lorem Ipsum used since the 1500s is
-                        reproduced below for those interested. Sections 1.10.32 and
-                        1.10.33.
-                      </p>
-                    </div>
-
-                    <div class="d-flex flex-start mt-4">
-                      <a class="me-3" href="#">
-                        <img class="rounded-circle shadow-1-strong"
-                          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(31).webp" alt="avatar"
-                          width="65" height="65" />
-                      </a>
-                      <div class="flex-grow-1 flex-shrink-1">
-                        <div>
-                          <div class="d-flex justify-content-between align-items-center">
-                            <p class="mb-1">
-                              Lisa Cudrow <span class="small">- 4 hours ago</span>
-                            </p>
-                          </div>
-                          <p class="small mb-0">
-                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-                            scelerisque ante sollicitudin commodo. Cras purus odio,
-                            vestibulum in vulputate at, tempus viverra turpis.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="d-flex flex-start mt-4">
-                      <a class="me-3" href="#">
-                        <img class="rounded-circle shadow-1-strong"
-                          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(29).webp" alt="avatar"
-                          width="65" height="65" />
-                      </a>
-                      <div class="flex-grow-1 flex-shrink-1">
-                        <div>
-                          <div class="d-flex justify-content-between align-items-center">
-                            <p class="mb-1">
-                              Maggie McLoan <span class="small">- 5 hours ago</span>
-                            </p>
-                          </div>
-                          <p class="small mb-0">
-                            a Latin professor at Hampden-Sydney College in Virginia,
-                            looked up one of the more obscure Latin words, consectetur
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="d-flex flex-start mt-4">
-                      <a class="me-3" href="#">
-                        <img class="rounded-circle shadow-1-strong"
-                          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar"
-                          width="65" height="65" />
-                      </a>
-                      <div class="flex-grow-1 flex-shrink-1">
-                        <div>
-                          <div class="d-flex justify-content-between align-items-center">
-                            <p class="mb-1">
-                              John Smith <span class="small">- 6 hours ago</span>
-                            </p>
-                          </div>
-                          <p class="small mb-0">
-                            Autem, totam debitis suscipit saepe sapiente magnam officiis
-                            quaerat necessitatibus odio assumenda, perferendis quae iusto
-                            labore laboriosam minima numquam impedit quam dolorem!
-                          </p>
-                        </div>
-                      </div>
+            <div class="">
+              <div class="row d-flex justify-content-center">
+                <div>
+                  <div class="card">
+                    <div class="card-body p-4">
+                      <h4 class="text-left font-italic mb-4 pb-2">Comentarios del diseño</h4>
+                      <%= render "comments/commets_form", comment: @comment, user: @user, design: @design %>
+                      <%= render "comments/commets", comments: @comments, answer: @answer, user: @user, answers: @answers %>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
           </div>
         </div>
       </div>
@@ -260,4 +92,63 @@
   </div>
 </section>
 <%# profile ends %>
+<%# modal photos %>
+<div class="modal fade " id="photoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content bg-black">
+      <div class="modal-body">
+          <div id="carousel">
+            <figure id="spinner">
+              <% @allphotos.each do |item| %>
+                <%= image_tag item , class: "w-lg-50 w-md-100  rounded-3 img-fluid", style: "height: 300px;" %>
+              <% end %>
+            </figure>
+          </div>
+          <span style="float:left" class="ss-icon" onclick="galleryspin('-')">&lt;</span>
+          <span style="float:right" class="ss-icon" onclick="galleryspin('')">&gt;</span>
+      </div>
+    </div>
+  </div>
+</div>
+<%# modal photos end %>
+<%# modal hcc %>
+<div class="modal fade" id="Modalhcc" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">HCCs</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">HCC</th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            <% @hcc.each_with_index do |item, index| %>
+            <tr>
+              <th scope="row"><%= index %></th>
+              <td><%= item.user %></td>
+              <td><%= item.comment %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
 
+    </div>
+  </div>
+</div>
+<%# modal hcc end %>
+<script>
+  var angle = 0;
+  function galleryspin(sign) {
+    spinner = document.querySelector("#spinner");
+    if (!sign) { angle = angle + 45; } else { angle = angle - 45; }
+    spinner.setAttribute("style","-webkit-transform: rotateY("+ angle +"deg); -moz-transform: rotateY("+ angle +"deg); transform: rotateY("+ angle +"deg);");
+  }
+</script>
