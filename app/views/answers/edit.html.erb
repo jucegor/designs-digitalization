@@ -1,0 +1,32 @@
+<section class="vh-100 back">
+  <div class="container py-5 h-100" style="overflow-y: hidden">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+        <div class="card" style="border-radius: 1rem;">
+          <div class="row g-0">
+            <div class="col-md-10 col-lg-12 d-flex align-items-center">
+              <div class="card-body p-4 p-lg-5 text-black">
+                <%= simple_form_for(@answer) do |f| %>
+                  <div class="row">
+                    <%= f.input :user,as: :hidden, input_html: { readonly: "readonly" }%>
+                    <%= f.input :comment_id,as: :hidden, input_html: { readonly: "readonly"} %>
+                    <%= f.input :answer, as: :text, label: "Respuesta" %>
+                    <div class="col-md-1">
+                    <label for="answerimg" >
+                    <i class="fa-solid fa-camera"></i>
+                    <%= f.input :answerimg,as: :file, input_html: {style: "display: none; width:10px; ", id:"answerimg"}, label: false %>
+                    </label>
+                    </div>
+                    <div class="col-md-11 d-md-flex justify-content-md-end ">
+                    <%= f.submit "Guardar", class: "btn btn-primary" %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

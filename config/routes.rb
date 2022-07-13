@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   root to: 'pages#home'
   devise_for :users
+
+  resources :comments, only: %i[show create new edit update destroy]
+  resources :answers
+
   get '/user', to: "designs#index", as: :user_root
   resources :designs
   get '/all_designs', to: 'designs#all_designs', as: :all_designs

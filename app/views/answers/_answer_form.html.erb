@@ -1,0 +1,18 @@
+<div class="container">
+  <%= simple_form_for(answer) do |f| %>
+    <div class="row">
+      <%= f.input :user,as: :hidden, input_html: {value: user.responsible, readonly: "readonly" }%>
+      <%= f.input :comment_id,as: :hidden, input_html: {value: comment, readonly: "readonly"} %>
+      <%= f.input :answer, as: :text, label:false %>
+      <div class="col-md-1">
+      <label for="answerimg" >
+      <i class="fa-solid fa-camera"></i>
+      <%= f.input :answerimg,as: :file, input_html: {style: "display: none; width:10px; ", id:"answerimg"}, label: false %>
+      </label>
+      </div>
+      <div class="col-md-11 d-md-flex justify-content-md-end ">
+      <%= f.submit "Guardar", class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+</div>

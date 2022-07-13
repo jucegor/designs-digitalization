@@ -1,27 +1,46 @@
-<h2>Sign up</h2>
+<section class="vh-100" style="background-color: #224f80;">
+  <div class="container py-5 h-100" style="overflow-y: hidden">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+        <div class="card" style="border-radius: 1rem;">
+          <div class="row g-0">
+            <div class="col-md-6 col-lg-5 d-none d-md-block">
+              <%= image_tag "welder-vertical", class: "img-fluid", style: "border-radius: 1rem 0 0 1rem; filter: grayscale(100%); hue-rotate(190deg) saturate(300%);" %>
+            </div>
+            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+              <div class="card-body p-3 p-lg-4 text-black">
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
+               <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+                  <%= f.error_notification %>
+                  <div class="form-inputs">
+                    <%= f.input :email,
+                                required: true,
+                                autofocus: true,
+                                input_html: { autocomplete: "email" }%>
+                    <%= f.input :password,
+                                required: true,
+                                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                                input_html: { autocomplete: "new-password" },
+                                label: "Contraseña" %>
+                    <%= f.input :password_confirmation,
+                                required: true,
+                                input_html: { autocomplete: "new-password" },
+                                label: "Confirmar Contraseña" %>
+                    <%= f.input :responsible, label: "Responsable" %>
+                    <label for="select" class="form-label">Tipo de usuario</label>
+                    <%= f.select :role, options_for_select([['Empelado de producción', 'employee'], ['Ingeniero de producto', 'engineer']]), {}, {class: "form-select", id: "select"} %>
+                  </div>
+                  <div class="form-actions">
+                    <%= f.button :submit, "Registrar", class: "btn btn-dark btn-lg btn-block mt-4" %>
+                  </div>
+                <% end %>
 
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" }%>
-    <%= f.input :password,
-                required: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: true,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :responsible %>
-    <%= f.select :role, options_for_select([['Empelado de producción', 'employee'], ['Ingeniero de producto', 'engineer']]) %>
+                <%= render "devise/shared/links" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</section>
