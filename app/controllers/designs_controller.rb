@@ -28,6 +28,7 @@ class DesignsController < ApplicationController
   def new
     @design = Design.new
     @user = current_user
+    @users = User.where(role: 'engineer')
     authorize @design
   end
 
@@ -45,7 +46,7 @@ class DesignsController < ApplicationController
 
   def edit
     @user = current_user
-    @users = User.all
+    @users = User.where(role: 'engineer')
     @responsible = @design.responsible
   end
 

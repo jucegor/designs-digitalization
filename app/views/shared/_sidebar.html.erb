@@ -48,15 +48,6 @@
 
     <ul class="logout">
         <li>
-          <a href="/users/edit" class="row">
-            <%= image_tag "log-out", class:"image-icon m-2" %>
-            <span class="nav-text col">
-                Cambiar contraseña
-            </span>
-          </a>
-        </li>
-
-        <li>
           <%= link_to destroy_user_session_path, method: :delete, class: "row" do%>
             <%= image_tag "log-out", class:"image-icon m-2" %>
             <span class="nav-text col">
