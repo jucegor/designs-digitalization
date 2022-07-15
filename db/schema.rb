@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_24_164928) do
+ActiveRecord::Schema.define(version: 2022_05_19_191441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,19 +38,23 @@ ActiveRecord::Schema.define(version: 2022_05_24_164928) do
 
   create_table "answers", force: :cascade do |t|
     t.string "user"
-    t.integer "comment_id"
+    t.integer "comment"
     t.string "answer"
+    t.bigint "comment_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["comment_id"], name: "index_answers_on_comment_id"
   end
 
   create_table "comments", force: :cascade do |t|
-    t.integer "design_id"
+    t.integer "design"
     t.string "user"
     t.string "comment"
     t.string "hcc"
+    t.bigint "design_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["design_id"], name: "index_comments_on_design_id"
   end
 
   create_table "designs", force: :cascade do |t|
@@ -63,9 +67,10 @@ ActiveRecord::Schema.define(version: 2022_05_24_164928) do
     t.string "status"
     t.string "autodesk_link"
     t.string "server_path"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
+    t.index ["user_id"], name: "index_designs_on_user_id"
   end
 
   create_table "requests", force: :cascade do |t|

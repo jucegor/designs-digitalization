@@ -1,5 +1,3 @@
-
-
 <section class="vh-100" style="background-color: #414142;">
   <div class="container py-5 h-100" style="overflow-y: hidden">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -14,11 +12,11 @@
                 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
                   <div class="d-flex align-items-center mb-3 pb-1">
-                    <%= image_tag "favicon", class: "m-1" %>
-                    <span class="h4 fw-bold mb-0">Digitalización de planos</span>
+                     <span class="h4 fw-bold mx-auto">Digitalización de planos</span>
+                     <%= image_tag "favicon", class: "sizeimg" %>
                   </div>
 
-                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Inicia sesión en tu cuenta:</h5>
+                  <%# <h5 class="fw-normal mb-4 pb-3" style="letter-spacing: 1px;">Inicia sesión en tu cuenta:</h5> %>
 
                   <div class="form-outline mb-4">
                   <%= f.input :email,

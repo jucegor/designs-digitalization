@@ -13,8 +13,7 @@ puts 'creating seed...'
 User.destroy_all
 Design.destroy_all
 
-
-
+=begin
 puts 'destroying all users and designs...'
 
 proyectos = ['RADIATOR GEN7 MAZDA NEW MODEL',
@@ -83,7 +82,7 @@ iterator = 0
   iterator += 1
 end
 
-
+=end
 
 puts 'creating admin account...'
 
