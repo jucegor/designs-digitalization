@@ -5,7 +5,7 @@ class CreateComments < ActiveRecord::Migration[6.0]
       t.string :user
       t.string :comment
       t.string :hcc
-
+      t.references :design, foreign_key: true, index: true
       t.timestamps
     end
   end
