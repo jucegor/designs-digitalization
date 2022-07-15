@@ -5,7 +5,7 @@
       <div class="container px-5">
         <div class="card">
           <div class="rounded-top text-white d-flex flex-row" style="background-color: #414142;">
-            <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
+            <div class="ms-4 mb-3 mt-5 d-flex flex-column col-md-3 " style="width: 150px;">
               <%= link_to "← Regresar", designs_path, class: "btn btn-outline-light mt-2" %>
               <% if policy(@design).edit? || @user.role == "engineer" %>
                 <%= link_to "Editar", edit_design_path(@design), class: "btn btn-outline-light mt-2", style: "z-index: 1;" %>
@@ -13,18 +13,20 @@
               <% if @user.role == "engineering_manager" && policy(@design).destroy? %>
                 <%= link_to "Eliminar", design_path(@design), method: "delete", class: "btn btn-outline-light mt-2", style: "z-index: 1;" %>
               <% end %>
-              <% if @design.document.present? %>
-                <%= link_to (image_tag @design.document.preview(resize_to_limit: [200, 200]), class: "img-fluid img-thumbnail mt-4 mb-2 hide", style: "width: 250px; height: auto; z-index: 1"), @design.document, target: :_blank %>
-              <% else %>
-                <%= image_tag "BIOIN-screen.png", style: "width: 250px; height: auto; z-index: 1", class: "img-fluid img-thumbnail mt-4 mb-2" %>
-              <% end %>
             </div>
-            <div class="ms-3 d-flex align-items-center">
+            <div class="ms-5 mb-3 col-md-3 d-flex align-items-center">
               <div>
                 <h2><%=  @design.project_number  %></h2>
                 <h5><%=  @design.project_name  %></h5>
                 <p class="text-light"><%=  @design.client  %></p>
               </div>
+            </div>
+            <div class="ms-5 col-md-6 d-flex align-items-center">
+            <% if @design.document.present? %>
+                <%= link_to (image_tag @design.document.preview(resize_to_limit: [500, 500]), class: "img-fluid img-thumbnail mt-4 mb-3 mx-auto none", style: "width: 350px; height: auto; z-index: 1;"), @design.document, target: :_blank %>
+              <% else %>
+                <%= image_tag "BIOIN-screen.png", style: "width: 250px; height: auto; z-index: 1", class: "img-fluid img-thumbnail mt-4 mb-3" %>
+              <% end %>
             </div>
           </div>
           <div class="p-4 text-black" style="background-color: #f8f9fa;">
