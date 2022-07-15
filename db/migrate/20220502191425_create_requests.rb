@@ -6,7 +6,7 @@ class CreateRequests < ActiveRecord::Migration[6.0]
       t.date :required_date
       t.date :delivered
       t.string :status
-      t.references :design, null: false, foreign_key: true
+      t.references :design, null: true, foreign_key: true
 
       t.timestamps
     end

@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 2022_05_24_164928) do
     t.date "required_date"
     t.date "delivered"
     t.string "status"
-    t.bigint "design_id", null: false
+    t.bigint "design_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["design_id"], name: "index_requests_on_design_id"

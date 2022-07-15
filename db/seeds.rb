@@ -13,6 +13,8 @@ puts 'creating seed...'
 User.destroy_all
 Design.destroy_all
 
+=begin
+
 puts 'destroying all users and designs...'
 
 proyectos = ['RADIATOR GEN7 MAZDA NEW MODEL',
@@ -81,10 +83,76 @@ iterator = 0
   iterator += 1
 end
 
+=end
+
 puts 'creating admin account...'
 
 User.create!(
-  email: 'admin@bioin.mx',
+  email: 'francisco.huerta@bioin.mx',
+  password: '123456',
+  responsible: 'Francisco Huerta',
+  admin: false,
+  role: 'engineer'
+)
+
+User.create!(
+  email: 'eduardo.carrillo@bioin.mx',
+  password: '123456',
+  responsible: 'Eduardo Carrillo',
+  admin: false,
+  role: 'engineer'
+)
+
+User.create!(
+  email: 'jl.nieves@bioin.mx',
+  password: '123456',
+  responsible: 'Jose Luis Nieves',
+  admin: false,
+  role: 'engineer'
+)
+
+User.create!(
+  email: 'hector.garduno@bioin.mx',
+  password: '123456',
+  responsible: 'Hector Gárduño',
+  admin: false,
+  role: 'engineer'
+)
+
+User.create!(
+  email: 'miguel.rivas@bioin.mx',
+  password: '123456',
+  responsible: 'Miguel Rivas',
+  admin: false,
+  role: 'engineer'
+)
+
+User.create!(
+  email: 'jose.alvarado@bioin.mx',
+  password: '123456',
+  responsible: 'Jose Alvarado',
+  admin: false,
+  role: 'engineer'
+)
+
+User.create!(
+  email: 'enrique.mercado@bioin.mx',
+  password: '123456',
+  responsible: 'Enrique Himmelstine',
+  admin: false,
+  role: 'engineer'
+)
+
+User.create!(
+  email: 'fernando.gomora@bioin.mx',
+  password: '123456',
+  responsible: 'Fernando Gomora',
+  admin: false,
+  role: 'engineer'
+)
+
+User.create!(
+  email: 'gustavo.pacheco@bioin.mx',
   password: '123456',
   responsible: 'Gustavo Pacheco',
   admin: true,
@@ -92,9 +160,26 @@ User.create!(
 )
 
 User.create!(
-  email: 'employee@bioin.mx',
+  email: 'julio.gonzalez@bioin.mx',
   password: '123456',
-  responsible: 'Roberto Palma',
+  responsible: 'Julio Gonzalez',
+  admin: true,
+  role: 'engineering_manager'
+)
+
+User.create!(
+  email: 'jesus.mata@bioin.mx',
+  password: '123456',
+  responsible: 'Jesus Mata',
+  admin: false,
+  role: 'production_manager'
+)
+
+User.create!(
+  email: 'linea1@bioin.mx',
+  password: '123456',
+  responsible: 'Linea 1 PL1',
+  admin: false,
   role: 'employee'
 )
 
