@@ -13,7 +13,7 @@ puts 'creating seed...'
 User.destroy_all
 Design.destroy_all
 
-=begin
+
 
 puts 'destroying all users and designs...'
 
@@ -83,7 +83,7 @@ iterator = 0
   iterator += 1
 end
 
-=end
+
 
 puts 'creating admin account...'
 
