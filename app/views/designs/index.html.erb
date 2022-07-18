@@ -34,7 +34,7 @@ of Simple CSS Waves-->
 
 <div class="row d-flex justify-content-end m-3" id="index-options">
 
-  <% if @user.role = 'employee' %>
+  <% if @user.role = 'employee'%>
   <div class="col-lg-6 col-md-12">
     <p class="text-end fs-2 mx-5 ">Bienvenido, <%= @user.responsible %></p>
   </div>
@@ -46,7 +46,7 @@ of Simple CSS Waves-->
   <div class="col-lg-4 col-md-12 m-2">
   <%= form_tag designs_path, id: "content", method: :get, class: "d-flex justify-content-between" do %>
   <%= text_field_tag :query, params[:query], class: "form-control", id: "floatingInput", placeholder: "Buscar un diseño" %>
-  <button type="reset" class="btn btn-outline-primary" id="search-btn">Buscar</button>
+  <button type="search" class="btn btn-outline-primary" id="search-btn">Buscar</button>
   <%= link_to "Reestablecer", designs_path, class: "btn btn-outline-secondary" %>
   </div>
   <% end %>

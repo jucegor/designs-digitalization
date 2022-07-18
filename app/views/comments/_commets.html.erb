@@ -15,9 +15,11 @@
                                </span>
                             </p>
                             <div>
+                            <% if f.user == @user.responsible %>
                               <a href=" <%= edit_comment_path(f.id) %>" class="m-2"><i class="fa-solid fa-pen-to-square link-dark"></i></a>
                               <%=link_to "" , comment_path(f.id), method: "delete" ,data:
                                 {confirm: 'Desea eliminar este comentario?' },class: "fa-solid fa-trash-can m-2 link-dark" %>
+                            <% end %>
                             </div>
                         </div>
                         <p class="small mb-0">
@@ -69,9 +71,12 @@
                             <%= image_tag l.answerimg , class: "w-100 rounded-3 img-fluid" %>
                             <% end %>
                         </p>
-                        <a href=" <%= edit_answer_path(l.id) %>" class="m-1"><i class="fa-solid fa-pen-to-square link-dark"></i></a>
+                        <% if l.user == @user.responsible %>
+                          <a href=" <%= edit_answer_path(l.id) %>" class="m-1"><i class="fa-solid fa-pen-to-square link-dark"></i></a>
                         <%=link_to "" , answer_path(l.id), method: "delete" ,data:
                                             {confirm: 'Desea eliminar este comentario?' },class: "fa-solid fa-trash-can link-dark" %>
+                        <% end %>
+
                     </div>
                 </div>
             </div>
