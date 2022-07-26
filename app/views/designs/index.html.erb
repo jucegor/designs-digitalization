@@ -32,7 +32,7 @@ of Simple CSS Waves-->
 
 
 
-<div class="row d-flex justify-content-end m-3" id="index-options">
+<div class="row d-flex justify-content-end m-3" id="">
 
   <% if @user.role = 'employee'%>
   <div class="col-lg-6 col-md-12">
@@ -54,13 +54,12 @@ of Simple CSS Waves-->
 </div>
 
 <div class="d-flex">
-
   <div class="container vertical-scrollable" id="designs-cards">
     <div class="row">
       <%  @designs.each do |design|%>
         <div class="card-product">
           <% if design.document.present? %>
-            <%= link_to (image_tag design.document.preview(resize_to_limit: [200, 200])), design.document, target: :_blank %>
+            <%= link_to (image_tag design.document.preview(resize_to_limit: [200, 200])), design.document, target: :_blank, class: "none" %>
           <% else %>
             <%= image_tag 'BIOIN-screen.png', class: "none" %>
           <% end %>
