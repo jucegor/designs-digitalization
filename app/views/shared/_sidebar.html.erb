@@ -13,14 +13,14 @@
             <span class="nav-text col">Todos los diseños</span>
           </a>
         </li>
-
+        <% if policy(Design).all_designs? && @user.role != 'production_manager' %>
         <li>
           <a href="/designs/new" class="row">
             <%= image_tag "new-design", class:"image-icon m-2" %>
             <span class="nav-text col">Nuevo diseño</span>
           </a>
         </li>
-
+        <% end %>
         <li>
           <a href="/requests" class="row">
             <%= image_tag "designs-requests", class:"image-icon m-2" %>

@@ -4,14 +4,24 @@ class DesignsController < ApplicationController
     @user = current_user
     case @user.role
     when 'employee'
-      @designs = policy_scope(Design.where(status: 'activo'))
+      @designs = policy_scope(search_bar_employee)
     when 'production_manager', 'engineering_manager'
-      @designs = policy_scope(Design)
+      @designs = policy_scope(search_bar_production)
     when 'engineer'
-      @designs = policy_scope(Design.where(user: current_user, status: 'activo'))
+      @designs = policy_scope(search_bar_engineer)
     end
+  end
 
-    params[:query].present? ? (@designs = Design.where("project_number LIKE '%#{params[:query]}%' OR project_name LIKE '%#{params[:query].upcase}%'")) : (@designs = Design.all)
+  def search_bar_employee
+    params[:query].present? ? (@designs = Design.where("project_number LIKE '%#{params[:query]}%' OR project_name LIKE '%#{params[:query].upcase}%'")) : (@designs = Design.where(status: 'activo'))
+  end
+
+  def search_bar_production
+    params[:query].present? ? (@designs = Design.where("project_number LIKE '%#{params[:query]}%' OR project_name LIKE '%#{params[:query].upcase}%'")) : (@designs = Design)
+  end
+
+  def search_bar_engineer
+    params[:query].present? ? (@designs = Design.where("project_number LIKE '%#{params[:query]}%' OR project_name LIKE '%#{params[:query].upcase}%'")) : (Design.where(user: current_user, status: 'activo'))
   end
 
   def all_designs
@@ -36,7 +46,6 @@ class DesignsController < ApplicationController
     @design = Design.new(design_params)
     @user = current_user
     authorize @design
-    @design.responsible = @user.responsible
     if @design.save
       redirect_to @design
     else

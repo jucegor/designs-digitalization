@@ -25,7 +25,7 @@
                         <p class="small mb-0">
                             <%= f.comment%>
                         </p>
-                        <p class="small mb-0">
+                        <p class="small mb-0 img-wrapper">
                         <% if f.annex.present? %>
                           <%= image_tag f.annex , class: "w-lg-50 w-md-100 rounded-3 img-fluid", style: "height: 300px;" %>
                         <% end %>
@@ -67,8 +67,10 @@
                         </div>
                         <p class="small mb-0">
                             <%=l.answer %>
+                        </p>
+                        <p class="small mb-0 img-wrapper">
                             <% if l.answerimg.present? %>
-                            <%= image_tag l.answerimg , class: "w-100 rounded-3 img-fluid" %>
+                            <%= image_tag l.answerimg , class: "w-lg-50 w-md-100 rounded-3 img-fluid", style: "height: 300px;" %>
                             <% end %>
                         </p>
                         <% if l.user == @user.responsible %>

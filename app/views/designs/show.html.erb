@@ -5,7 +5,7 @@
       <div class="container px-5">
         <div class="card">
           <div class="rounded-top text-white d-flex flex-row" style="background-color: #414142;">
-            <div class="ms-4 mb-3 mt-5 d-flex flex-column col-md-3 " style="width: 150px;">
+            <div class="ms-4 mb-3 mt-5 d-flex flex-column col-md-3 align-self-center" style="width: 150px;">
               <%= link_to "← Regresar", designs_path, class: "btn btn-outline-light mt-2" %>
               <% if policy(@design).edit? || @user.role == "engineer" %>
                 <%= link_to "Editar", edit_design_path(@design), class: "btn btn-outline-light mt-2", style: "z-index: 1;" %>
@@ -14,11 +14,11 @@
                 <%= link_to "Eliminar", design_path(@design), method: "delete", class: "btn btn-outline-light mt-2", style: "z-index: 1;" %>
               <% end %>
             </div>
-            <div class="ms-5 mb-3 col-md-3 d-flex align-items-center">
+            <div class="ms-4 mb-3 mt-5 d-flex flex-column col-md-4 align-self-center ">
               <div>
-                <h2><%=  @design.project_number  %></h2>
-                <h5><%=  @design.project_name  %></h5>
-                <p class="text-light"><%=  @design.client  %></p>
+                <h2 class="text-center"><%=  @design.project_number  %></h2>
+                <h5 class="text-center"><%=  @design.project_name  %></h5>
+                <p class="text-light text-center"><%=  @design.client  %></p>
               </div>
             </div>
             <div class="ms-5 col-md-6 d-flex align-items-center">
@@ -69,7 +69,7 @@
             </div>
             <div class="row g-2">
             <% @lastphotos.each do |f| %>
-              <div class="col-lg-6 col-md-12 mb-2 align-items-center">
+              <div class="col-lg-6 col-md-12 mb-2 d-flex justify-content-center">
               <%= image_tag f , class: "w-lg-50 w-md-100  rounded-3 img-fluid", style: "height: 300px;" %>
               </div>
             <%end %>
@@ -95,7 +95,7 @@
 </section>
 <%# profile ends %>
 <%# modal photos %>
-<div class="modal fade " id="photoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade " id="photoModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-xl">
     <div class="modal-content bg-black">
       <div class="modal-body">
@@ -114,11 +114,11 @@
 </div>
 <%# modal photos end %>
 <%# modal hcc %>
-<div class="modal fade" id="Modalhcc" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="Modalhcc" tabindex="-1" aria-labelledby="ModalhccLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">HCCs</h5>
+        <h5 class="modal-title" id="ModalhccLabel">HCCs</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -146,6 +146,11 @@
   </div>
 </div>
 <%# modal hcc end %>
+<div class="pop">
+        <div class="pop-img">
+            <img src="#" alt="" />
+        </div>
+    </div>
 <script>
   var angle = 0;
   function galleryspin(sign) {
@@ -153,4 +158,25 @@
     if (!sign) { angle = angle + 45; } else { angle = angle - 45; }
     spinner.setAttribute("style","-webkit-transform: rotateY("+ angle +"deg); -moz-transform: rotateY("+ angle +"deg); transform: rotateY("+ angle +"deg);");
   }
+</script>
+<script>
+ $(document).ready(function() {
+  const previewImg = document.querySelectorAll('.img-wrapper img');
+  const modalImg = document.querySelector('.pop-img img');
+  const modal = document.querySelector('.pop');
+  previewImg.forEach((images) => {
+      images.addEventListener('click', () => {
+          modal.classList.add('open');
+          let imgSrc = images.src;
+          modalImg.src = imgSrc;
+          console.log(modalImg.src);
+      });
+  });
+
+  modal.addEventListener('click', e => {
+      if (e.target.classList.contains('pop')) {
+          modal.classList.remove('open');
+      }
+  });
+   });
 </script>
