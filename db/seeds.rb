@@ -88,7 +88,7 @@ puts 'creating admin account...'
 
 User.create!(
   email: 'francisco.huerta@bioin.mx',
-  password: '123456',
+  password: 'ing1322pako',
   responsible: 'Francisco Huerta',
   admin: false,
   role: 'engineer'
@@ -96,7 +96,7 @@ User.create!(
 
 User.create!(
   email: 'eduardo.carrillo@bioin.mx',
-  password: '123456',
+  password: 'Carrillo',
   responsible: 'Eduardo Carrillo',
   admin: false,
   role: 'engineer'
@@ -104,7 +104,7 @@ User.create!(
 
 User.create!(
   email: 'jl.nieves@bioin.mx',
-  password: '123456',
+  password: 'jlnieves',
   responsible: 'Jose Luis Nieves',
   admin: false,
   role: 'engineer'
@@ -112,7 +112,7 @@ User.create!(
 
 User.create!(
   email: 'hector.garduno@bioin.mx',
-  password: '123456',
+  password: 'hectorgarduno',
   responsible: 'Hector Gárduño',
   admin: false,
   role: 'engineer'
@@ -120,7 +120,7 @@ User.create!(
 
 User.create!(
   email: 'miguel.rivas@bioin.mx',
-  password: '123456',
+  password: '29O971MR',
   responsible: 'Miguel Rivas',
   admin: false,
   role: 'engineer'
@@ -128,15 +128,23 @@ User.create!(
 
 User.create!(
   email: 'jose.alvarado@bioin.mx',
-  password: '123456',
+  password: 'Alvoroz2020',
   responsible: 'Jose Alvarado',
   admin: false,
   role: 'engineer'
 )
 
 User.create!(
+  email: 'ivonne.rincon@bioin.mx',
+  password: 'Vonita1505$',
+  responsible: 'Ivonne Rincon',
+  admin: false,
+  role: 'engineer'
+)
+
+User.create!(
   email: 'enrique.mercado@bioin.mx',
-  password: '123456',
+  password: 'BioHimmel$06',
   responsible: 'Enrique Himmelstine',
   admin: false,
   role: 'engineer'
@@ -152,7 +160,7 @@ User.create!(
 
 User.create!(
   email: 'gustavo.pacheco@bioin.mx',
-  password: '123456',
+  password: 'jgp.bio',
   responsible: 'Gustavo Pacheco',
   admin: true,
   role: 'engineering_manager'
