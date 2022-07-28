@@ -21,7 +21,8 @@ class DesignsController < ApplicationController
   end
 
   def search_bar_engineer
-    params[:query].present? ? (@designs = Design.where("project_number LIKE '%#{params[:query]}%' OR project_name LIKE '%#{params[:query].upcase}%'")) : (Design.where(user: current_user, status: 'activo'))
+    @user = current_user
+    params[:query].present? ? (@designs = Design.where("project_number LIKE '%#{params[:query]}%' OR project_name LIKE '%#{params[:query].upcase}%'")) : (Design.where(status: 'activo', responsible: @user.responsible))
   end
 
   def all_designs
