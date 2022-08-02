@@ -16,6 +16,9 @@ class DesignPolicy < ApplicationPolicy
     true
   end
 
+  def edit?
+    true
+  end
   # An engineer can destroy a design only if he created it
   def destroy?
     user_is_owner_or_admin
