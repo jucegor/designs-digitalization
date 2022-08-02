@@ -7,7 +7,7 @@
           <div class="rounded-top text-white d-flex flex-row" style="background-color: #414142;">
             <div class="ms-4 mb-3 mt-5 d-flex flex-column col-md-3 align-self-center" style="width: 150px;">
               <%= link_to "← Regresar", designs_path, class: "btn btn-outline-light mt-2" %>
-              <% if policy(@design).edit? || @user.role == "engineer" %>
+              <% if policy(@design).edit? && @user.role == "engineer" && @user.responsible == @design.responsible || @user.role == "engineering_manager"%>
                 <%= link_to "Editar", edit_design_path(@design), class: "btn btn-outline-light mt-2", style: "z-index: 1;" %>
               <% end %>
               <% if @user.role == "engineering_manager" && policy(@design).destroy? %>
@@ -19,6 +19,9 @@
                 <h2 class="text-center"><%=  @design.project_number  %></h2>
                 <h5 class="text-center"><%=  @design.project_name  %></h5>
                 <p class="text-light text-center"><%=  @design.client  %></p>
+                <div class="d-grid gap-2 mx-auto">
+                <%= link_to "3D 🧊", @design.autodesk_link, target: :_blank, class: "btn btn-outline-light rounded-pill mx-auto" %>
+                </div>
               </div>
             </div>
             <div class="ms-5 col-md-6 d-flex align-items-center">
