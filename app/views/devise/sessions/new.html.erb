@@ -10,14 +10,11 @@
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
               <div class="card-body p-4 p-lg-5 text-black">
                 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-
                   <div class="d-flex align-items-center mb-3 pb-1">
                      <span class="h4 fw-bold mx-auto">Digitalización de planos</span>
                      <%= image_tag "favicon", class: "sizeimg" %>
                   </div>
-
                   <%# <h5 class="fw-normal mb-4 pb-3" style="letter-spacing: 1px;">Inicia sesión en tu cuenta:</h5> %>
-
                   <div class="form-outline mb-4">
                   <%= f.input :email,
                               required: false,
@@ -26,7 +23,6 @@
                               class: "form-control form-control-lg",
                               label: "Email" %>
                   </div>
-
                   <div class="form-outline mb-4">
                   <%= f.input :password,
                               required: false,
@@ -34,17 +30,13 @@
                               class: "form-control form-control-lg",
                               label: "Contraseña" %>
                   </div>
-
                   <div class="pt-1 mb-4">
                     <%= f.button :submit, "Iniciar sesión", class: "btn btn-dark btn-lg btn-block" %>
                   </div>
-
                   <%= f.check_box :remember_me, as: :boolean if devise_mapping.rememberable? %>
                   <%= f.label :remember_me, "Recordar mi usuario" %>
                   <br>
                   <br>
-                  <%= render "devise/shared/links" %>
-
                 <% end %>
               </div>
             </div>
