@@ -102,27 +102,70 @@ div#carousel~span:hover {
     text-transform: capitalize;
 }
 
+.hide {
+    display: none;
+}
+
 @media screen and (max-width: 991px) {
     /* Aquí van los estilos para tablets grandes */
-    .hide {
-        visibility: hidden;
-    }
     .none {
         display: none;
+    }
+    .py-5 {
+        padding-top: 0rem !important;
+        padding-bottom: 0rem !important;
+    }
+    .px-5 {
+        padding-right: 0rem !important;
+        padding-left: 0rem !important;
+    }
+    .hide {
+        display: block;
+    }
+    #image-design {
+        height: 380px;
     }
 }
 
 @media screen and (max-width: 767px) {
     /* Aquí van los estilos para tablets medianas */
+    .none {
+        display: none;
+    }
+    .py-5 {
+        padding-top: 0rem !important;
+        padding-bottom: 0rem !important;
+    }
+    .px-5 {
+        padding-right: 0rem !important;
+        padding-left: 0rem !important;
+    }
     .hide {
-        visibility: hidden;
+        display: block;
+    }
+    #image-design {
+        height: 380px;
     }
 }
 
 @media screen and (max-width: 479px) {
     /* Aquí van los estilos para smartphones */
+    .none {
+        display: none;
+    }
+    .py-5 {
+        padding-top: 0rem !important;
+        padding-bottom: 0rem !important;
+    }
+    .px-5 {
+        padding-right: 0rem !important;
+        padding-left: 0rem !important;
+    }
     .hide {
-        visibility: hidden;
+        display: block;
+    }
+    #image-design {
+        height: 380px;
     }
 }
 

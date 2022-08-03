@@ -1,6 +1,6 @@
 <%# profile starts %>
 <section class="h-100 gradient-custom-2">
-  <div class=" py-5">
+  <div class="py-5">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="container px-5">
         <div class="card">
@@ -28,7 +28,7 @@
             <% if @design.document.present? %>
                 <%= link_to (image_tag @design.document.preview(resize_to_limit: [500, 500]), class: "img-fluid img-thumbnail mt-4 mb-3 mx-auto none"), @design.document, target: :_blank %>
               <% else %>
-                <%= image_tag "BIOIN-screen.png", style: "width: 250px; height: auto; z-index: 1", class: "img-fluid img-thumbnail mt-4 mb-3" %>
+                <%= image_tag "BIOIN-screen.png", style: "width: 250px; height: auto; z-index: 1", class: "img-fluid img-thumbnail mt-4 mb-3 none" %>
               <% end %>
             </div>
           </div>
@@ -52,8 +52,8 @@
               </div>
             </div>
           </div>
-          <div class="card-body p-4 text-black">
-            <div class="mb-5">
+          <div class="card-body p-4 text-black ">
+            <div class="mb-5 none">
               <p class="lead fw-normal mb-1">Detalles del diseño</p>
               <div class="p-4" style="background-color: #f8f9fa;">
                 <p class="font-italic mb-1"><strong>Responsable: </strong> <br> <%=  @design.responsible  %></p> <br>
@@ -181,5 +181,6 @@
           modal.classList.remove('open');
       }
   });
+
    });
 </script>

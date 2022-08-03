@@ -19,15 +19,19 @@
 
 <div class="container">
   <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-      <div class="col" id="image-design">
+      <div class="col none" id="image-design">
         <%= image_tag "design-3d", class: "d-block mx-lg-auto img-fluid image-design-top", width: "500", height: "300" %>
         <%= image_tag "design-blueprint", class: "d-block mx-lg-auto img-fluid image-design-bottom", width: "500", height: "300" %>
       </div>
       <div class="col">
         <%= image_tag "logo-bioin.png", class: "logo-header" %> <br> <br>
         <h1 class="display-5 fw-bold lh-1 mb-3">Digitalización de planos</h1>
-        <p class="lead">Una forma eficiente y segura de compartir diseños de productos con todas las áreas productivas. Conoce los detalles de cada producto y haz las preguntas directas al ingeniero a cargo.</p>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <p class="lead none">Una forma eficiente y segura de compartir diseños de productos con todas las áreas productivas. Conoce los detalles de cada producto y haz las preguntas directas al ingeniero a cargo.</p>
+        <div class="col hide" id="image-design">
+        <%= image_tag "design-3d", class: "d-block mx-lg-auto img-fluid image-design-top", width: "400", height: "225" %>
+        <%= image_tag "design-blueprint", class: "d-block mx-lg-auto img-fluid image-design-bottom", width: "400", height: "225" %>
+      </div>
+        <div class="d-grid gap-2 mb-5 d-md-flex justify-content-md-start">
           <%= link_to "Iniciar sesión", new_user_session_url, class: "btn btn-dark btn-xl rounded-pill" %>
         </div>
       </div>
