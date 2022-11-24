@@ -46,6 +46,7 @@ class DesignsController < ApplicationController
   def create
     @design = Design.new(design_params)
     @user = current_user
+    @users = User.where(role: 'engineer')
     authorize @design
     if @design.save
       redirect_to @design
@@ -87,7 +88,13 @@ class DesignsController < ApplicationController
 
   def update
     @design.update(design_params)
-    redirect_to @design
+    @user = current_user
+    case @user.role
+    when 'production_manager', 'engineering_manager'
+      redirect_to all_designs_path
+    when 'engineer'
+      redirect_to @design
+    end
   end
 
   def destroy

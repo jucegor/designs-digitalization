@@ -34,9 +34,9 @@
 
 
 
-<div class="container" id="all-designs-table">
-  <table class="table table-hover table-dark data-table">
-    <thead>
+<div class="container shadow-lg p-3 mb-5 bg-body rounded" >
+  <table class="table table-bordered table-striped table-hover" id="example">
+    <thead class= "">
       <tr>
         <th scope="col">No. Proyecto</th>
         <th scope="col">Cliente</th>
@@ -45,23 +45,30 @@
         <th scope="col">Última modificación</th>
         <th scope="col">Estatus</th>
         <th scope="col">Plano</th>
+        <th scope="col">3D</th>
+        <th scope="col">  </th>
       </tr>
     </thead>
     <tbody>
     <% @designs.each do |design| %>
       <tr>
-        <td> <%= link_to design.project_number, design_path(design), class: "btn btn-outline-light" %> </td>
+        <td> <%= link_to design.project_number, design_path(design), class: "btn btn-outline-dark" %> </td>
         <td> <%= design.client %> </td>
         <td> <%= design.project_name %> </td>
         <td> <%= design.revision %> </td>
         <td> <%= design.updated_at.localtime.to_formatted_s(:db) %> </td>
         <td> <%= design.status %> </td>
         <% if design.document.present? %>
-          <td> <%= link_to "SI", design.document %> </td>
+          <td> <%= link_to "SI", design.document, target: :_blank %> </td>
         <% else %>
           <td> NO </td>
         <% end %>
-
+        <% if design.autodesk_link.present? %>
+          <td> <%= link_to "SI", design.autodesk_link, target: :_blank%> </td>
+        <% else %>
+          <td> NO </td>
+        <% end %>
+        <td class="align-middle"> <%= link_to "", edit_design_path(design), class: "bi bi-pencil-square", style: "z-index: 1;" %> </td>
       </tr>
     <% end %>
     </tbody>
